@@ -7,7 +7,7 @@
 
 ---
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Prova_Subito-blue?style=for-the-badge)](https://tuonome.github.io/python-tutorial-library)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Prova_Subito-blue?style=for-the-badge)](https://phantumblade.github.io/python-tutorial-library)
 [![License: MIT](https://img.shields.io/badge/📄_License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/🤝_PRs-Welcome-brightgreen?style=for-the-badge)](http://makeapullrequest.com)
 
@@ -84,7 +84,7 @@ python-tutorial-library/
 <div align="center">
 
 ### 🌐 **Metodo 1: Demo Online**
-[![Apri Demo](https://img.shields.io/badge/🌐_Apri_Demo-Immediato-blue?style=for-the-badge)](https://tuonome.github.io/python-tutorial-library)
+[![Apri Demo](https://img.shields.io/badge/🌐_Apri_Demo-Immediato-blue?style=for-the-badge)](https://phantumblade.github.io/python-tutorial-library)
 
 ### 💻 **Metodo 2: Locale**
 
@@ -92,7 +92,7 @@ python-tutorial-library/
 
 ```bash
 # 📥 Clona il repository
-git clone https://github.com/tuonome/python-tutorial-library.git
+git clone https://github.com/phantumblade/python-tutorial-library.git
 cd python-tutorial-library
 
 # 🌐 Apri nel browser
@@ -126,7 +126,7 @@ npx http-server    # Node.js
 
 ```bash
 # 1️⃣ Setup iniziale
-git clone https://github.com/tuonome/python-tutorial-library.git
+git clone https://github.com/phantumblade/python-tutorial-library.git
 cd python-tutorial-library
 
 # 2️⃣ Crea un branch per le tue modifiche
@@ -221,14 +221,14 @@ graph TD
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/tuonome/python-tutorial-library?style=for-the-badge&logo=github)
-![GitHub forks](https://img.shields.io/github/forks/tuonome/python-tutorial-library?style=for-the-badge&logo=github)
-![GitHub issues](https://img.shields.io/github/issues/tuonome/python-tutorial-library?style=for-the-badge&logo=github)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/tuonome/python-tutorial-library?style=for-the-badge&logo=github)
+![GitHub stars](https://img.shields.io/github/stars/phantumblade/python-tutorial-library?style=for-the-badge&logo=github)
+![GitHub forks](https://img.shields.io/github/forks/phantumblade/python-tutorial-library?style=for-the-badge&logo=github)
+![GitHub issues](https://img.shields.io/github/issues/phantumblade/python-tutorial-library?style=for-the-badge&logo=github)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/phantumblade/python-tutorial-library?style=for-the-badge&logo=github)
 
-![Size](https://img.shields.io/github/repo-size/tuonome/python-tutorial-library?style=for-the-badge)
-![License](https://img.shields.io/github/license/tuonome/python-tutorial-library?style=for-the-badge)
-![Last commit](https://img.shields.io/github/last-commit/tuonome/python-tutorial-library?style=for-the-badge)
+![Size](https://img.shields.io/github/repo-size/phantumblade/python-tutorial-library?style=for-the-badge)
+![License](https://img.shields.io/github/license/phantumblade/python-tutorial-library?style=for-the-badge)
+![Last commit](https://img.shields.io/github/last-commit/phantumblade/python-tutorial-library?style=for-the-badge)
 
 </div>
 
@@ -260,21 +260,17 @@ Questo progetto è rilasciato sotto **[Licenza MIT](LICENSE)**
 <div align="center">
 
 ### 👤 **Autore**
-**Il Tuo Nome**
+**PhantumBlade**
 
-[![Email](https://img.shields.io/badge/📧_Email-tuo.email@esempio.com-red?style=for-the-badge)](mailto:tuo.email@esempio.com)
-[![Twitter](https://img.shields.io/badge/🐦_Twitter-@tuonick-blue?style=for-the-badge)](https://twitter.com/tuonick)
-[![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Il_Tuo_Profilo-blue?style=for-the-badge)](https://linkedin.com/in/tuoprofilo)
-[![GitHub](https://img.shields.io/badge/🐙_GitHub-tuonome-black?style=for-the-badge)](https://github.com/tuonome)
+[![GitHub](https://img.shields.io/badge/🐙_GitHub-phantumblade-black?style=for-the-badge)](https://github.com/phantumblade)
 
 ### 🆘 **Supporto**
 
 | **Tipo di Supporto** | **Dove Trovarlo** |
 |:--------------------:|:------------------:|
-| 🐛 **Bug Report** | [GitHub Issues](https://github.com/tuonome/python-tutorial-library/issues) |
-| 💡 **Feature Request** | [GitHub Discussions](https://github.com/tuonome/python-tutorial-library/discussions) |
-| ❓ **Domande Generali** | [Email](mailto:tuo.email@esempio.com) |
-| 📖 **Documentazione** | [Wiki del Progetto](https://github.com/tuonome/python-tutorial-library/wiki) |
+| 🐛 **Bug Report** | [GitHub Issues](https://github.com/phantumblade/python-tutorial-library/issues) |
+| 💡 **Feature Request** | [GitHub Discussions](https://github.com/phantumblade/python-tutorial-library/discussions) |
+| 📖 **Documentazione** | [Wiki del Progetto](https://github.com/phantumblade/python-tutorial-library/wiki) |
 
 </div>
 
@@ -286,13 +282,13 @@ Questo progetto è rilasciato sotto **[Licenza MIT](LICENSE)**
 
 **Lascia una stella su GitHub e condividilo con i tuoi amici!**
 
-[![Star this repo](https://img.shields.io/badge/⭐_Star_this_repo-GitHub-yellow?style=for-the-badge)](https://github.com/tuonome/python-tutorial-library)
-[![Share on Twitter](https://img.shields.io/badge/🐦_Share_on_Twitter-1DA1F2?style=for-the-badge)](https://twitter.com/intent/tweet?text=Scopri%20Python%20Tutorial%20Library%20-%20Una%20libreria%20interattiva%20per%20imparare%20Python!&url=https://github.com/tuonome/python-tutorial-library)
+[![Star this repo](https://img.shields.io/badge/⭐_Star_this_repo-GitHub-yellow?style=for-the-badge)](https://github.com/phantumblade/python-tutorial-library)
+[![Share on Twitter](https://img.shields.io/badge/🐦_Share_on_Twitter-1DA1F2?style=for-the-badge)](https://twitter.com/intent/tweet?text=Scopri%20Python%20Tutorial%20Library%20-%20Una%20libreria%20interattiva%20per%20imparare%20Python!&url=https://github.com/phantumblade/python-tutorial-library)
 
 ---
 
 **Fatto con ❤️ per la community Python italiana**
 
-*Ultimo aggiornamento: Gennaio 2024*
+*Ultimo aggiornamento: Luglio 2025*
 
 </div>
