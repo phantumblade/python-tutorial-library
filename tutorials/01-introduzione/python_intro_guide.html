@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduzione a Python</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #3776ab;
+            --primary-yellow: #ffd43b;
+            --dark-bg: #2c3e50;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --border: #e9ecef;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), #4a90e2);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+        }
+
+        .python-logo {
+            font-size: 4rem;
+            color: var(--primary-yellow);
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: var(--dark-bg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--primary-blue);
+            border-bottom-color: var(--primary-yellow);
+        }
+
+        .content {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .section-icon {
+            width: 3rem;
+            height: 3rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 3.5rem;
+            margin: 2rem 0;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #e1e1e1;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border-left: 3px solid var(--primary-blue);
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .comment { color: #6a9955; }
+        .function { color: #dcdcaa; }
+
+        .highlight {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--warning);
+            margin: 1rem 0;
+        }
+
+        .highlight-icon {
+            color: var(--warning);
+            margin-right: 0.5rem;
+        }
+
+        .interactive-demo {
+            background: var(--light-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .demo-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-input {
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            font-size: 0.95rem;
+            background: #1e1e1e;
+            color: #e1e1e1;
+            resize: vertical;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        .demo-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: var(--success);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #218838;
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .output {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            color: var(--text-dark);
+            min-height: 50px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .output.success {
+            border-color: var(--success);
+            background: #f8fff8;
+        }
+
+        .output.error {
+            border-color: var(--danger);
+            background: #fff8f8;
+            color: var(--danger);
+        }
+
+        .operator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .operator-item {
+            background: var(--white);
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .operator-item:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .operator-symbol {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'SF Mono', Monaco, monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .operator-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .type-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .type-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .type-item:hover {
+            border-color: var(--primary-blue);
+            transform: translateX(5px);
+        }
+
+        .type-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .type-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .type-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-icon {
+            font-size: 3rem;
+            color: var(--primary-yellow);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .python-logo {
+                font-size: 3rem;
+            }
+
+            .nav-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-link {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .operator-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-link {
+                padding: 1rem;
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        /* Migliora la larghezza delle card nelle griglie */
+.grid-2 .card, .grid-3 .card {
+    min-width: 350px;
+}
+@media (max-width: 900px) {
+    .grid-2 .card, .grid-3 .card {
+        min-width: 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="python-logo">
+                <i class="fab fa-python"></i>
+            </div>
+            <h1>Introduzione a Python</h1>
+            <p>Guida completa ai concetti fondamentali del linguaggio</p>
+        </header>
+
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="#repl" class="nav-link">
+                    <i class="fas fa-terminal"></i>
+                    <span>REPL</span>
+                </a>
+                <a href="#sintassi" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    <span>Sintassi</span>
+                </a>
+                <a href="#tipi" class="nav-link">
+                    <i class="fas fa-tags"></i>
+                    <span>Tipi</span>
+                </a>
+                <a href="#operatori" class="nav-link">
+                    <i class="fas fa-calculator"></i>
+                    <span>Operatori</span>
+                </a>
+                <a href="#costrutti" class="nav-link">
+                    <i class="fas fa-cogs"></i>
+                    <span>Costrutti</span>
+                </a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <section id="repl" class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <h2>REPL: Read, Evaluate, Print, Loop</h2>
+                </div>
+
+                <p>Python è un linguaggio <strong>interpretato</strong> che utilizza un REPL. Quando inserisci un'espressione, viene immediatamente interpretata e il risultato mostrato.</p>
+
+                <div class="highlight">
+                    <i class="fas fa-lightbulb highlight-icon"></i>
+                    <strong>Importante:</strong> Non serve scrivere <code>print</code> per vedere il risultato di un'espressione!
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">
+                        <i class="fas fa-play-circle"></i>
+                        Prova il REPL Python
+                    </div>
+                    <textarea class="code-input" placeholder="Scrivi codice Python... (es: 23 + 33)">23 + 33</textarea>
+                    <div class="demo-controls">
+                        <span>Inserisci un'espressione e premi Esegui</span>
+                        <button class="btn" onclick="runCode(this)">
+                            <i class="fas fa-play"></i>
+                            Esegui
+                        </button>
+                    </div>
+                    <div class="output"></div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <h3>Hello World</h3>
+                        </div>
+                        <p>Il programma più semplice in Python:</p>
+                        <div class="code-block"><span class="function">print</span>(<span class="string">"Hello World"</span>)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sintassi" class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h2>Sintassi di Base</h2>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-indent"></i>
+                            </div>
+                            <h3>Indentazione</h3>
+                        </div>
+                        <p>Raggruppa le istruzioni con l'indentazione (4 spazi):</p>
+                        <div class="code-block"><span class="keyword">if</span> <span class="keyword">True</span>:
+    <span class="function">print</span>(<span class="string">"Blocco indentato"</span>)
+<span class="function">print</span>(<span class="string">"Fuori dal blocco"</span>)</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <h3>Commenti</h3>
+                        </div>
+                        <p>Usa <code>#</code> per i commenti:</p>
+                        <div class="code-block"><span class="comment"># Questo è un commento</span>
+a = <span class="number">5</span>  <span class="comment"># Commento inline</span></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-equals"></i>
+                            </div>
+                            <h3>Assegnamento</h3>
+                        </div>
+                        <p><code>=</code> assegna, <code>==</code> confronta:</p>
+                        <div class="code-block">a = <span class="number">6</span>        <span class="comment"># assegnamento</span>
+<span class="keyword">if</span> a == <span class="number">5</span>:   <span class="comment"># confronto</span>
+    <span class="function">print</span>(<span class="string">"a è 5"</span>)</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-font"></i>
+                            </div>
+                            <h3>Case Sensitive</h3>
+                        </div>
+                        <p>Distingue maiuscole/minuscole:</p>
+                        <div class="code-block">Variable = <span class="string">"diverso da"</span>
+variable = <span class="string">"questa variabile"</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tipi" class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h2>Tipi di Dati</h2>
+                </div>
+
+                <div class="highlight">
+                    <i class="fas fa-info-circle highlight-icon"></i>
+                    <strong>Tipizzazione dinamica:</strong> I tipi sono associati agli oggetti, non alle variabili.
+                </div>
+
+                <div class="type-list">
+                    <div class="type-item">
+                        <div class="type-icon">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                        <div class="type-content">
+                            <h4>int - Numeri Interi</h4>
+                            <p>Dimensione illimitata. Supporta hex (0x), ottale (0o), binario (0b)</p>
+                            <div class="code-block">a = <span class="number">999999999999999999999999999999</span>
+b = <span class="number">0xFF</span>  <span class="comment"># 255 in hex</span></div>
+                        </div>
+                    </div>
+
+                    <div class="type-item">
+                        <div class="type-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="type-content">
+                            <h4>float - Numeri Decimali</h4>
+                            <p>Con punto decimale o notazione scientifica</p>
+                            <div class="code-block">pi = <span class="number">3.14159</span>
+grande = <span class="number">1e100</span></div>
+                        </div>
+                    </div>
+
+                    <div class="type-item">
+                        <div class="type-icon">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                        <div class="type-content">
+                            <h4>str - Stringhe</h4>
+                            <p>Sequenze di caratteri immutabili</p>
+                            <div class="code-block">nome = <span class="string">"Python"</span>
+messaggio = <span class="string">'Hello!'</span></div>
+                        </div>
+                    </div>
+
+                    <div class="type-item">
+                        <div class="type-icon">
+                            <i class="fas fa-list-ul"></i>
+                        </div>
+                        <div class="type-content">
+                            <h4>list - Liste</h4>
+                            <p>Sequenze mutabili di oggetti</p>
+                            <div class="code-block">numeri = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]
+mista = [<span class="number">1</span>, <span class="string">"ciao"</span>, <span class="keyword">True</span>]</div>
+                        </div>
+                    </div>
+
+                    <div class="type-item">
+                        <div class="type-icon">
+                            <i class="fas fa-toggle-on"></i>
+                        </div>
+                        <div class="type-content">
+                            <h4>bool - Booleani</h4>
+                            <p>True/False. Supporta Truthy/Falsy</p>
+                            <div class="code-block">vero = <span class="keyword">True</span>
+falso = <span class="keyword">False</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="operatori" class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h2>Operatori Matematici</h2>
+                </div>
+
+                <div class="operator-grid">
+                    <div class="operator-item" onclick="testOperator('+', 8, 3)">
+                        <div class="operator-symbol">+</div>
+                        <div class="operator-name">Addizione</div>
+                    </div>
+                    <div class="operator-item" onclick="testOperator('-', 8, 3)">
+                        <div class="operator-symbol">-</div>
+                        <div class="operator-name">Sottrazione</div>
+                    </div>
+                    <div class="operator-item" onclick="testOperator('*', 8, 3)">
+                        <div class="operator-symbol">*</div>
+                        <div class="operator-name">Moltiplicazione</div>
+                    </div>
+                    <div class="operator-item" onclick="testOperator('/', 8, 3)">
+                        <div class="operator-symbol">/</div>
+                        <div class="operator-name">Divisione</div>
+                    </div>
+                    <div class="operator-item" onclick="testOperator('//', 8, 3)">
+                        <div class="operator-symbol">//</div>
+                        <div class="operator-name">Div. Intera</div>
+                    </div>
+                    <div class="operator-item" onclick="testOperator('**', 2, 3)">
+                        <div class="operator-symbol">**</div>
+                        <div class="operator-name">Potenza</div>
+                    </div>
+                    <div class="operator-item" onclick="testOperator('%', 8, 3)">
+                        <div class="operator-symbol">%</div>
+                        <div class="operator-name">Modulo</div>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">
+                        <i class="fas fa-calculator"></i>
+                        Test Operatori
+                    </div>
+                    <div id="operator-result" class="output" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section id="costrutti" class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h2>Costrutti Principali</h2>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h3>if-elif-else</h3>
+                        </div>
+                        <p>Strutture condizionali:</p>
+                        <div class="code-block"><span class="keyword">if</span> x > <span class="number">0</span>:
+    <span class="function">print</span>(<span class="string">"Positivo"</span>)
+<span class="keyword">elif</span> x < <span class="number">0</span>:
+    <span class="function">print</span>(<span class="string">"Negativo"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Zero"</span>)</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-repeat"></i>
+                            </div>
+                            <h3>for Loop</h3>
+                        </div>
+                        <p>Iterazione su sequenze:</p>
+                        <div class="code-block"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">5</span>):
+    <span class="function">print</span>(i)</div>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 60px;">for i in range(3):
+    print(f"Numero: {i}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-function"></i>
+                            </div>
+                            <h3>Funzioni</h3>
+                        </div>
+                        <p>Definire funzioni riutilizzabili:</p>
+                        <div class="code-block"><span class="keyword">def</span> <span class="function">saluta</span>(nome):
+    <span class="keyword">return</span> <span class="string">f"Ciao, {nome}!"</span></div>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 80px;">def quadrato(n):
+    return n * n
+
+print(quadrato(5))</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+                </div>
+
+<div class="highlight">
+                    <i class="fas fa-star highlight-icon"></i>
+                    <strong>Truthy/Falsy:</strong> Valori "vuoti" (0, "", [], None) sono Falsy, tutto il resto è Truthy.
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h3>Assegnamento Multiplo</h3>
+                        </div>
+                        <p>Assegna più variabili contemporaneamente:</p>
+                        <div class="code-block">a, b, c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>
+<span class="comment"># Scambio valori</span>
+a, b = b, a</div>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 80px;">a, b = 10, 20
+print(f"Prima: a={a}, b={b}")
+a, b = b, a
+print(f"Dopo: a={a}, b={b}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-sync"></i>
+                            </div>
+                            <h3>while Loop</h3>
+                        </div>
+                        <p>Ripetizione basata su condizione:</p>
+                        <div class="code-block"><span class="keyword">while</span> condizione:
+    <span class="comment"># blocco while</span>
+<span class="keyword">else</span>:
+    <span class="comment"># se non c'è break</span></div>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 80px;">i = 0
+while i < 3:
+    print(f"i = {i}")
+    i += 1</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">
+                        <i class="fas fa-vial"></i>
+                        Test Truthy/Falsy
+                    </div>
+                    <textarea class="code-input">valori = [0, 1, "", "hello", [], [1, 2], None, True, False]
+for v in valori:
+    risultato = "Truthy" if v else "Falsy"
+    print(f"{repr(v)} è {risultato}")</textarea>
+                    <div class="demo-controls">
+                        <span>Testa i valori Truthy e Falsy</span>
+                        <button class="btn" onclick="runCode(this)">
+                            <i class="fas fa-play"></i> Esegui
+                        </button>
+                    </div>
+                    <div class="output"></div>
+                </div>
+            <section class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2>Motivazioni per Usare Python</h2>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <h3>Multiparadigma</h3>
+                        </div>
+                        <p>Python supporta diversi stili di programmazione: procedurale, orientato agli oggetti e funzionale. Puoi scegliere l'approccio migliore per ogni problema.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3>Facilità</h3>
+                        </div>
+                        <p>Python è relativamente facile da imparare e ha una vasta comunità di supporto con documentazione eccellente.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <h3>Efficienza</h3>
+                        </div>
+                        <p>Sebbene interpretato, Python può essere ottimizzato grazie all'uso di librerie scritte in C per le operazioni critiche.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>Librerie</h3>
+                        </div>
+                        <p>Python ha un'enorme quantità di librerie per diversi scopi: web development, data science, AI, automazione e molto altro.</p>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <i class="fas fa-puzzle-piece highlight-icon"></i>
+                    <strong>Cosa sono le librerie?</strong> Sono collezioni di moduli predefiniti che forniscono strumenti e funzioni per eseguire compiti specifici, rendendo Python estremamente versatile.
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="demo-title">
+                        <i class="fas fa-calculator"></i>
+                        Esempio di Libreria Math
+                    </div>
+                    <textarea class="code-input" style="min-height: 100px;"># Esempio di utilizzo della libreria math
+import math
+
+print(f"Radice quadrata di 16: {math.sqrt(16)}")
+print(f"Pi greco: {math.pi:.4f}")
+print(f"Seno di 90 gradi: {math.sin(math.radians(90))}")
+print(f"Logaritmo naturale di e: {math.log(math.e)}")
+print(f"2 elevato alla 10: {math.pow(2, 10)}")</textarea>
+                    <button class="btn" onclick="runCode(this)">
+                        <i class="fas fa-play"></i> Esegui
+                    </button>
+                    <div class="output"></div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h2>Vantaggi e Svantaggi dei Linguaggi Interpretati</h2>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background-color: var(--success);">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                            <h3>Vantaggi</h3>
+                        </div>
+                        <div class="type-list">
+                            <div class="type-item">
+                                <div class="type-icon" style="background-color: var(--success);">
+                                    <i class="fas fa-zap"></i>
+                                </div>
+                                <div class="type-content">
+                                    <h4>Semplicità</h4>
+                                    <p>Facile provare subito il codice senza compilazione. Scrivi una riga e vedi immediatamente il risultato.</p>
+                                </div>
+                            </div>
+
+                            <div class="type-item">
+                                <div class="type-icon" style="background-color: var(--success);">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="type-content">
+                                    <h4>Portabilità</h4>
+                                    <p>Non dipende dal sistema operativo. Python può essere eseguito su Windows, Mac, Linux senza modifiche al codice.</p>
+                                </div>
+                            </div>
+
+                            <div class="type-item">
+                                <div class="type-icon" style="background-color: var(--success);">
+                                    <i class="fas fa-bug"></i>
+                                </div>
+                                <div class="type-content">
+                                    <h4>Debugging</h4>
+                                    <p>Facile individuare errori poiché l'interprete li segnala man mano che esegue il codice, riga per riga.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background-color: var(--danger);">
+                                <i class="fas fa-thumbs-down"></i>
+                            </div>
+                            <h3>Svantaggi</h3>
+                        </div>
+                        <div class="type-list">
+                            <div class="type-item">
+                                <div class="type-icon" style="background-color: var(--danger);">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="type-content">
+                                    <h4>Velocità</h4>
+                                    <p>L'esecuzione può essere più lenta rispetto ai linguaggi compilati, perché ogni riga deve essere interpretata al momento dell'esecuzione.</p>
+                                </div>
+                            </div>
+
+                            <div class="type-item">
+                                <div class="type-icon" style="background-color: var(--danger);">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                                <div class="type-content">
+                                    <h4>Efficienza</h4>
+                                    <p>Non avendo una fase di compilazione che ottimizza il codice, può risultare meno efficiente in termini di prestazioni.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h2>Esempi Pratici</h2>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h3>Calcolatrice</h3>
+                        </div>
+                        <p>Esempio di calcolatrice semplice:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 120px;">def calcolatrice(a, b, operazione):
+    if operazione == "+":
+        return a + b
+    elif operazione == "-":
+        return a - b
+    elif operazione == "*":
+        return a * b
+    elif operazione == "/":
+        return a / b if b != 0 else "Errore: divisione per zero"
+    else:
+        return "Operazione non valida"
+
+print(calcolatrice(10, 5, "+"))
+print(calcolatrice(10, 5, "/"))
+print(calcolatrice(10, 0, "/"))</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <h3>Lavoro con Liste</h3>
+                        </div>
+                        <p>Operazioni comuni sulle liste:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 120px;">numeri = [1, 2, 3, 4, 5]
+print(f"Lista originale: {numeri}")
+
+# Aggiungere elementi
+numeri.append(6)
+print(f"Dopo append(6): {numeri}")
+
+# Somma e media
+somma = sum(numeri)
+media = somma / len(numeri)
+print(f"Somma: {somma}, Media: {media:.2f}")
+
+# Filtrare numeri pari
+pari = [n for n in numeri if n % 2 == 0]
+print(f"Numeri pari: {pari}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-text-width"></i>
+                            </div>
+                            <h3>Manipolazione Stringhe</h3>
+                        </div>
+                        <p>Operazioni comuni sulle stringhe:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 120px;">testo = "Python è fantastico!"
+print(f"Testo: '{testo}'")
+print(f"Lunghezza: {len(testo)}")
+print(f"Maiuscolo: {testo.upper()}")
+print(f"Parole: {testo.split()}")
+
+# Controllo contenuto
+if "Python" in testo:
+    print("Il testo contiene 'Python'")
+
+# Formatting
+nome = "Mario"
+età = 25
+print(f"Ciao {nome}, hai {età} anni!")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-hashtag"></i>
+                            </div>
+                            <h3>Numeri e Matematica</h3>
+                        </div>
+                        <p>Operazioni matematiche avanzate:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 120px;"># Operazioni di base
+print(f"Radice quadrata di 16: {16**0.5}")
+print(f"Pi greco approssimato: {22/7:.4f}")
+print(f"2 elevato alla 10: {2**10}")
+
+# Controllo numero primo
+def è_primo(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+print(f"7 è primo? {è_primo(7)}")
+print(f"8 è primo? {è_primo(8)}")
+
+# Fattoriale
+def fattoriale(n):
+    if n <= 1:
+        return 1
+    return n * fattoriale(n-1)
+
+print(f"5! = {fattoriale(5)}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h2>Esercizi Pratici</h2>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3>Esercizio 1: FizzBuzz</h3>
+                        </div>
+                        <p>Stampa numeri da 1 a 15, sostituendo multipli di 3 con "Fizz", di 5 con "Buzz", di entrambi con "FizzBuzz":</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 120px;"># FizzBuzz classico
+for i in range(1, 16):
+    if i % 15 == 0:
+        print("FizzBuzz")
+    elif i % 3 == 0:
+        print("Fizz")
+    elif i % 5 == 0:
+        print("Buzz")
+    else:
+        print(i)</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Esercizio 2: Fibonacci</h3>
+                        </div>
+                        <p>Genera i primi 10 numeri della sequenza di Fibonacci:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 120px;"># Fibonacci iterativo (più efficiente)
+def fibonacci(n):
+    if n <= 1:
+        return n
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    return b
+
+print("Primi 10 numeri di Fibonacci:")
+for i in range(10):
+    print(f"F({i}) = {fibonacci(i)}")
+
+# Lista dei primi 10
+fib_lista = [fibonacci(i) for i in range(10)]
+print(f"\nLista: {fib_lista}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3>Esercizio 3: Indovina il Numero</h3>
+                        </div>
+                        <p>Gioco semplice di indovinare un numero (simulato):</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 120px;"># Indovina il numero (simulato)
+numero_segreto = 7
+tentativi = [5, 8, 7]  # Tentativi simulati
+
+print("Benvenuto al gioco 'Indovina il numero'!")
+print("Il numero è tra 1 e 10")
+
+for i, tentativo in enumerate(tentativi, 1):
+    print(f"\nTentativo {i}: {tentativo}")
+
+    if tentativo == numero_segreto:
+        print("🎉 Complimenti! Hai indovinato!")
+        break
+    elif tentativo < numero_segreto:
+        print("📈 Troppo basso!")
+    else:
+        print("📉 Troppo alto!")
+
+print(f"\nIl numero era: {numero_segreto}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-sort"></i>
+                            </div>
+                            <h3>Esercizio 4: Ordinamento</h3>
+                        </div>
+                        <p>Implementa un algoritmo di ordinamento semplice:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 120px;"># Bubble Sort semplificato
+def bubble_sort(lista):
+    n = len(lista)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if lista[j] > lista[j + 1]:
+                lista[j], lista[j + 1] = lista[j + 1], lista[j]
+    return lista
+
+# Test
+numeri = [64, 34, 25, 12, 22, 11, 90]
+print(f"Lista originale: {numeri}")
+
+ordinata = bubble_sort(numeri.copy())
+print(f"Lista ordinata: {ordinata}")
+
+# Ordinamento Python built-in
+facile = sorted([64, 34, 25, 12, 22, 11, 90])
+print(f"Con sorted(): {facile}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h2>Concetti Avanzati</h2>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <h3>List Comprehension</h3>
+                        </div>
+                        <p>Crea liste in modo conciso:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 100px;"># List comprehension esempi
+quadrati = [x**2 for x in range(10)]
+print(f"Quadrati: {quadrati}")
+
+pari = [x for x in range(20) if x % 2 == 0]
+print(f"Numeri pari: {pari}")
+
+# Nested comprehension
+matrice = [[i*j for j in range(3)] for i in range(3)]
+print(f"Matrice: {matrice}")
+
+# Con condizioni
+positivi = [x for x in [-2, -1, 0, 1, 2] if x > 0]
+print(f"Solo positivi: {positivi}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <h3>Dizionari</h3>
+                        </div>
+                        <p>Strutture chiave-valore:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 100px;"># Dizionari in azione
+studente = {
+    "nome": "Mario",
+    "età": 20,
+    "voti": [8, 9, 7, 8.5]
+}
+
+print(f"Studente: {studente['nome']}")
+print(f"Età: {studente['età']}")
+print(f"Media voti: {sum(studente['voti'])/len(studente['voti']):.1f}")
+
+# Aggiungere chiavi
+studente["università"] = "UniBO"
+print(f"Università: {studente['università']}")
+
+# Iterare
+for chiave, valore in studente.items():
+    print(f"{chiave}: {valore}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-filter"></i>
+                            </div>
+                            <h3>Lambda e Filter</h3>
+                        </div>
+                        <p>Funzioni anonime e filtraggio:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 100px;"># Lambda functions
+quadrato = lambda x: x**2
+print(f"Quadrato di 5: {quadrato(5)}")
+
+# Con map (simulato)
+numeri = [1, 2, 3, 4, 5]
+quadrati = [quadrato(x) for x in numeri]
+print(f"Quadrati: {quadrati}")
+
+# Filter con lambda (simulato)
+pari = [x for x in numeri if x % 2 == 0]
+print(f"Numeri pari: {pari}")
+
+# Ordinamento con lambda
+studenti = [("Alice", 85), ("Bob", 92), ("Charlie", 78)]
+per_voto = sorted(studenti, key=lambda x: x[1])
+print(f"Ordinati per voto: {per_voto}")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <h3>Gestione Errori</h3>
+                        </div>
+                        <p>Try-except per gestire eccezioni:</p>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 100px;"># Gestione errori
+def divisione_sicura(a, b):
+    try:
+        risultato = a / b
+        return f"Risultato: {risultato}"
+    except ZeroDivisionError:
+        return "Errore: divisione per zero!"
+    except TypeError:
+        return "Errore: tipi non validi!"
+    except Exception as e:
+        return f"Errore generico: {e}"
+
+# Test vari casi
+print(divisione_sicura(10, 2))
+print(divisione_sicura(10, 0))
+print(divisione_sicura("10", 2))
+
+# Finally
+def test_finally():
+    try:
+        print("Operazione in corso...")
+        return "Successo"
+    finally:
+        print("Pulizia sempre eseguita")
+
+print(test_finally())</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-icon">
+                <i class="fab fa-python"></i>
+            </div>
+            <h2>Python - Il Linguaggio del Futuro</h2>
+            <p>Hai completato l'introduzione a Python! Continua a praticare con progetti reali per padroneggiare questo potente linguaggio di programmazione.</p>
+            <div style="margin-top: 1rem; opacity: 0.8;">
+                <p>🐍 Python è versatile • 🚀 Facile da imparare • 💪 Potente per ogni progetto</p>
+            </div>
+        </footer>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <script>
+        let pyodideReady = false;
+    let pyodide = null;
+
+async function loadPyodideAndPackages() {
+    try {
+        pyodide = await loadPyodide();
+        pyodideReady = true;
+        console.log("Pyodide caricato con successo!");
+
+        // Aggiorna l'interfaccia per mostrare che è pronto
+        document.querySelectorAll('.btn').forEach(btn => {
+            if (btn.textContent.includes('Esegui')) {
+                btn.style.background = '#28a745'; // Verde
+            }
+        });
+    } catch (error) {
+        console.error("Errore nel caricamento di Pyodide:", error);
+        pyodideReady = false;
+    }
+}
+    loadPyodideAndPackages();
+
+    async function runCode(button) {
+        const container = button.closest('.interactive-demo') || button.closest('.card');
+        const input = container.querySelector('.code-input');
+        const output = container.querySelector('.output');
+        const code = input.value.trim();
+
+        if (!code) {
+            output.textContent = 'Inserisci del codice';
+            output.className = 'output error';
+            output.style.display = 'block';
+            return;
+        }
+
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Esecuzione...';
+        button.disabled = true;
+
+        if (!pyodideReady) {
+            output.textContent = 'Pyodide non è ancora pronto, attendi...';
+            output.className = 'output error';
+            output.style.display = 'block';
+            button.innerHTML = '<i class="fas fa-play"></i> Esegui';
+            button.disabled = false;
+            return;
+        }
+
+        try {
+            let result = await pyodide.runPythonAsync(`
+import sys
+import io
+sys.stdout = io.StringIO()
+sys.stderr = io.StringIO()
+${code}
+sys.stdout.getvalue() + sys.stderr.getvalue()
+            `);
+            output.textContent = result || 'Eseguito';
+            output.className = 'output success';
+            output.style.display = 'block';
+        } catch (error) {
+            output.textContent = 'Errore: ' + error;
+            output.className = 'output error';
+            output.style.display = 'block';
+        }
+        button.innerHTML = '<i class="fas fa-play"></i> Esegui';
+        button.disabled = false;
+    }
+
+    function testOperator(op, a, b) {
+        const resultDiv = document.getElementById('operator-result');
+        if (!resultDiv) return;
+
+        try {
+            let result;
+            switch (op) {
+                case '+': result = a + b; break;
+                case '-': result = a - b; break;
+                case '*': result = a * b; break;
+                case '/': result = (a / b).toFixed(3); break;
+                case '//': result = Math.floor(a / b); break;
+                case '**': result = Math.pow(a, b); break;
+                case '%': result = a % b; break;
+                default: result = 'Operatore non supportato';
+            }
+
+            resultDiv.textContent = `${a} ${op} ${b} = ${result}`;
+            resultDiv.className = 'output success';
+            resultDiv.style.display = 'block';
+
+        } catch (error) {
+            resultDiv.textContent = `Errore: ${error.message}`;
+            resultDiv.className = 'output error';
+            resultDiv.style.display = 'block';
+        }
+    }
+
+    // Navigazione e inizializzazione
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    function updateActiveSection() {
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        let currentSection = '';
+        const scrollPos = window.scrollY + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === currentSection) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveSection);
+    window.addEventListener('load', updateActiveSection);
+
+    // Gestione Ctrl+Enter per eseguire codice
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+            const target = e.target;
+            if (target.classList.contains('code-input')) {
+                const button = target.closest('.interactive-demo').querySelector('.btn');
+                if (button) runCode(button);
+            }
+        }
+    });
+
+    // Inizializzazione
+    document.addEventListener('DOMContentLoaded', function() {
+        updateActiveSection();
+
+        // Auto-focus primo input
+        const firstInput = document.querySelector('.code-input');
+        if (firstInput) {
+            firstInput.focus();
+        }
+    });
+
+    // Funzione per auto-espandere i textarea in base al contenuto
+function autoResizeTextarea(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = (textarea.scrollHeight + 2) + 'px';
+}
+
+// Inizializza gli textarea esistenti
+document.querySelectorAll('textarea.code-input').forEach(textarea => {
+    autoResizeTextarea(textarea);
+
+    // Aggiungi evento input per l'auto-espansione
+    textarea.addEventListener('input', function() {
+        autoResizeTextarea(this);
+    });
+});
+    </script>
+</body>
+</html>
