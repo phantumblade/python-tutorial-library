@@ -2,7 +2,7 @@
 
 # <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40" height="40" alt="Python"/> Python Tutorial Library
 
-**Una libreria interattiva completa per imparare Python da zero**
+**Una libreria interattiva completa per imparare Python da zero**  
 *Tutorial pratici • Esercizi interattivi • Esempi funzionanti*
 
 ---
@@ -221,7 +221,11 @@ git push origin feature/miglioramento-ui
 <div align="center">
 
 ### <img src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Objects/Scroll.png" width="26" height="26" alt="License"/> Licenza
+<<<<<<< HEAD
 Questo progetto è rilasciato sotto **[Licenza MIT](LICENSE)**
+=======
+Questo progetto è rilasciato sotto **[Licenza MIT](LICENSE)**  
+>>>>>>> 6d83a6ad42b15e549bacc381bf4b2dd7f6bc04c2
 *Libero per uso personale e commerciale*
 
 ### <img src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Smilies/Red%20Heart.png" width="26" height="26" alt="Thanks"/> Riconoscimenti
