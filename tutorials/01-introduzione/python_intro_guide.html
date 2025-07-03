@@ -42,7 +42,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-blue), #4a90e2);
+            background: var(--primary-blue);
             color: var(--white);
             text-align: center;
             padding: 3rem 1rem;
@@ -82,7 +82,7 @@
 
         .nav-container {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -222,7 +222,7 @@
         .function { color: #dcdcaa; }
 
         .highlight {
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            background: #fff9c4;
             padding: 1rem;
             border-radius: 0.5rem;
             border-left: 4px solid var(--warning);
@@ -520,6 +520,26 @@
                     <i class="fas fa-cogs"></i>
                     <span>Costrutti</span>
                 </a>
+                <a href="#motivazioni" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span>Motivazioni</span>
+                </a>
+                <a href="#vantaggi" class="nav-link">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>Pro/Contro</span>
+                </a>
+                <a href="#esempi" class="nav-link">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Esempi</span>
+                </a>
+                <a href="#esercizi" class="nav-link">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Esercizi</span>
+                </a>
+                <a href="#concetti" class="nav-link">
+                    <i class="fas fa-rocket"></i>
+                    <span>Avanzati</span>
+                </a>
             </div>
         </nav>
 
@@ -665,6 +685,18 @@ b = <span class="number">0xFF</span>  <span class="comment"># 255 in hex</span><
                             <p>Con punto decimale o notazione scientifica</p>
                             <div class="code-block">pi = <span class="number">3.14159</span>
 grande = <span class="number">1e100</span></div>
+                        </div>
+                    </div>
+
+                    <div class="type-item">
+                        <div class="type-icon">
+                            <i class="fas fa-square-root-alt"></i>
+                        </div>
+                        <div class="type-content">
+                            <h4>complex - Numeri Complessi</h4>
+                            <p>Parte reale e immaginaria con suffisso <code>j</code></p>
+                            <div class="code-block">z = <span class="number">3</span> + <span class="number">2j</span>
+w = <span class="function">complex</span>(1, -1)</div>
                         </div>
                     </div>
 
@@ -820,6 +852,24 @@ print(quadrato(5))</textarea>
                             <div class="output"></div>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <h3>Input dell'Utente</h3>
+                        </div>
+                        <p>Acquisire dati da tastiera:</p>
+                        <div class="code-block"><span class="function">input</span>(<span class="string">"Come ti chiami? "</span>)</div>
+                        <div class="interactive-demo">
+                            <textarea class="code-input" style="min-height: 60px;">nome = input("Come ti chiami? ")
+print(f"Ciao {nome}!")</textarea>
+                            <button class="btn" onclick="runCode(this)">
+                                <i class="fas fa-play"></i> Esegui
+                            </button>
+                            <div class="output"></div>
+                        </div>
+                    </div>
                 </div>
 
 <div class="highlight">
@@ -874,6 +924,22 @@ while i < 3:
                             <div class="output"></div>
                         </div>
                     </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Funzioni vs Metodi</h3>
+                        </div>
+                        <p>Nei metodi il nome è preceduto dall'oggetto:</p>
+                        <div class="code-block">class Saluto:
+    def hello(self):
+        print("Ciao")
+
+sal = Saluto()
+sal.hello()</div>
+                    </div>
                 </div>
 
                 <div class="interactive-demo">
@@ -893,7 +959,7 @@ for v in valori:
                     </div>
                     <div class="output"></div>
                 </div>
-            <section class="section">
+            <section id="motivazioni" class="section">
                 <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-star"></i>
@@ -968,7 +1034,7 @@ print(f"2 elevato alla 10: {math.pow(2, 10)}")</textarea>
                 </div>
             </section>
 
-            <section class="section">
+            <section id="vantaggi" class="section">
                 <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-balance-scale"></i>
@@ -1049,7 +1115,7 @@ print(f"2 elevato alla 10: {math.pow(2, 10)}")</textarea>
                 </div>
             </section>
 
-            <section class="section">
+            <section id="esempi" class="section">
                 <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-lightbulb"></i>
@@ -1192,7 +1258,7 @@ print(f"5! = {fattoriale(5)}")</textarea>
                 </div>
             </section>
 
-            <section class="section">
+            <section id="esercizi" class="section">
                 <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-graduation-cap"></i>
@@ -1331,7 +1397,7 @@ print(f"Con sorted(): {facile}")</textarea>
                 </div>
             </section>
 
-            <section class="section">
+            <section id="concetti" class="section">
                 <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-rocket"></i>
