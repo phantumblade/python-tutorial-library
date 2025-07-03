@@ -401,7 +401,7 @@
             }
         }
 
-        /* Scroll animations */
+        /* Scroll animations
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -411,7 +411,7 @@
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
-        }
+        } */
 
         /* Progress Bar */
         .progress-bar {
@@ -1392,6 +1392,8 @@ print(chr(69))  # E</code></pre>
 
         // Code block copy functionality
         document.querySelectorAll('pre').forEach(block => {
+            const code = block.querySelector('code');
+            if (!code) return;
             const button = document.createElement('button');
             button.className = 'copy-button';
             button.innerHTML = '<i class="fas fa-copy"></i>';
