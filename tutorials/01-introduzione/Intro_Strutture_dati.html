@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Completa Python - Introduzione e Strutture Dati</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --purple-color: #9b59b6;
+            --dark-blue: #34495e;
+            --python-blue: #3776ab;
+            --python-yellow: #ffd343;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --text-color: #2c3e50;
+            --text-light: #6c757d;
+            --border-color: #dee2e6;
+            --code-bg: #f8f9fa;
+            --code-border: #e9ecef;
+            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-bg);
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--python-blue);
+            font-size: 2.5rem;
+        }
+
+        .logo h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .toc h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .toc-item {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .toc-item a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-item a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Sections */
+        .section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            color: var(--secondary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .subsection {
+            margin-bottom: 2.5rem;
+        }
+
+        .subsection h3 {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .subsection h3 i {
+            color: var(--success-color);
+            font-size: 1.2rem;
+        }
+
+        .subsection h4 {
+            color: var(--dark-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Text Styles */
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            border: 1px solid var(--code-border);
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--code-border);
+            position: relative;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .info-box i {
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .info-box.note {
+            background: rgba(52, 152, 219, 0.1);
+            border-left-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .info-box.warning {
+            background: rgba(243, 156, 18, 0.1);
+            border-left-color: var(--warning-color);
+            color: var(--warning-color);
+        }
+
+        .info-box.tip {
+            background: rgba(39, 174, 96, 0.1);
+            border-left-color: var(--success-color);
+            color: var(--success-color);
+        }
+
+        .info-box.important {
+            background: rgba(231, 76, 60, 0.1);
+            border-left-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--light-bg);
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        /* Examples */
+        .example {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example-title i {
+            color: var(--success-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--primary-color);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h1>Guida Completa Python</h1>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#toc"><i class="fas fa-list"></i> Indice</a></li>
+                    <li><a href="#intro"><i class="fas fa-play"></i> Introduzione</a></li>
+                    <li><a href="#strutture"><i class="fas fa-database"></i> Strutture Dati</a></li>
+                    <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Table of Contents -->
+        <section id="toc" class="toc fade-in">
+            <h2><i class="fas fa-bookmark"></i> Indice dei Contenuti</h2>
+            <ul class="toc-list">
+                <li class="toc-item"><a href="#intro"><i class="fas fa-rocket"></i> Introduzione a Python</a></li>
+                <li class="toc-item"><a href="#obiettivi"><i class="fas fa-target"></i> Obiettivi del Corso</a></li>
+                <li class="toc-item"><a href="#storia"><i class="fas fa-history"></i> Storia di Python</a></li>
+                <li class="toc-item"><a href="#strumenti"><i class="fas fa-tools"></i> Strumenti di Sviluppo</a></li>
+                <li class="toc-item"><a href="#jupyter"><i class="fas fa-book"></i> Jupyter Notebook</a></li>
+                <li class="toc-item"><a href="#spyder"><i class="fas fa-code"></i> Spyder IDE</a></li>
+                <li class="toc-item"><a href="#sequenze"><i class="fas fa-list-ol"></i> Sequenze</a></li>
+                <li class="toc-item"><a href="#stringhe"><i class="fas fa-quote-left"></i> Stringhe</a></li>
+                <li class="toc-item"><a href="#slicing"><i class="fas fa-cut"></i> Slicing</a></li>
+                <li class="toc-item"><a href="#liste"><i class="fas fa-list"></i> Liste</a></li>
+                <li class="toc-item"><a href="#tuple"><i class="fas fa-link"></i> Tuple</a></li>
+                <li class="toc-item"><a href="#set"><i class="fas fa-circle"></i> Set</a></li>
+                <li class="toc-item"><a href="#dizionari"><i class="fas fa-key"></i> Dizionari</a></li>
+                <li class="toc-item"><a href="#conversioni"><i class="fas fa-exchange-alt"></i> Conversioni</a></li>
+            </ul>
+        </section>
+
+        <!-- Introduzione Section -->
+        <section id="intro" class="section fade-in">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Introduzione a Python e Programmazione Funzionale</h2>
+
+            <div class="highlight-box">
+                <h3>Benvenuto nel Mondo di Python!</h3>
+                <p>Scopri le basi della programmazione funzionale con Python, un linguaggio potente e versatile usato in tutto il mondo.</p>
+            </div>
+
+            <div id="obiettivi" class="subsection">
+                <h3><i class="fas fa-target"></i> Obiettivi del Corso</h3>
+                <p>Questo corso introduce la programmazione funzionale e la programmazione in Python, fornendo una base solida per sviluppatori di tutti i livelli.</p>
+
+                <h4>Perché Python?</h4>
+                <p>Python non è un linguaggio principalmente funzionale, ma è un linguaggio <strong>multiparadigma</strong> che supporta programmazione procedurale, orientata agli oggetti e funzionale. Esistono linguaggi principalmente funzionali (OCaml, Haskell, F#), ma abbiamo scelto Python per la sua diffusione e praticità.</p>
+
+                <div class="info-box tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <strong>Vantaggi di Python:</strong>
+                        <ul>
+                            <li>Relativamente facile da imparare</li>
+                            <li>Interfacciamento con librerie C ad alte prestazioni</li>
+                            <li>Ecosistema enorme di librerie disponibili</li>
+                            <li>Supporto per diversi paradigmi di programmazione</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>Perché la Programmazione Funzionale?</h4>
+                <ul>
+                    <li><strong>Base matematica:</strong> Fondata sul lambda calcolo</li>
+                    <li><strong>Paradigma diverso:</strong> Insegna approcci alternativi alla risoluzione dei problemi</li>
+                    <li><strong>Semplicità:</strong> Spesso porta a soluzioni più eleganti</li>
+                    <li><strong>Parallelizzazione:</strong> Si presta meglio all'esecuzione parallela automatica</li>
+                </ul>
+
+                <h4>Elementi della Programmazione Funzionale</h4>
+                <ul>
+                    <li><strong>Composizione di funzioni:</strong> I programmi sono combinazioni di funzioni</li>
+                    <li><strong>Funzioni come oggetti:</strong> Possono essere passate come parametri e ritornate</li>
+                    <li><strong>Immutabilità:</strong> I dati non vengono modificati, ma sostituiti con nuovi dati</li>
+                    <li><strong>Lazy evaluation:</strong> Calcoli eseguiti solo quando necessari</li>
+                </ul>
+
+                <div class="info-box note">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Immutabilità in Python:</strong> Python ha sia dati immutabili (tipi primitivi, stringhe, tuple) che dati mutabili (liste, insiemi, dizionari).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Storia Python Section -->
+        <section id="storia" class="section fade-in">
+            <h2 class="section-title"><i class="fas fa-history"></i> Storia di Python</h2>
+
+            <div class="subsection">
+                <h3><i class="fas fa-user"></i> Origini e Sviluppo</h3>
+                <ul>
+                    <li><strong>Creatore:</strong> Guido van Rossum, programmatore olandese</li>
+                    <li><strong>Nome:</strong> Deriva da "Monty Python's Flying Circus"</li>
+                    <li><strong>Primo rilascio:</strong> 1991</li>
+                    <li><strong>Versione 2.0:</strong> 2000</li>
+                    <li><strong>Versione 3.0:</strong> 2008</li>
+                </ul>
+
+                <div class="info-box warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Importante:</strong> Python 3 è molto diverso da Python 2 e non è backward-compatible. Il supporto per Python 2 è terminato il 1° gennaio 2020.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strumenti Section -->
+        <section id="strumenti" class="section fade-in">
+            <h2 class="section-title"><i class="fas fa-tools"></i> Strumenti di Sviluppo</h2>
+
+            <div class="subsection">
+                <h3><i class="fas fa-box"></i> Anaconda Distribution</h3>
+                <p>Nel laboratorio utilizziamo Anaconda3, che include:</p>
+                <ul>
+                    <li>Python 3.7.3 (o versioni successive)</li>
+                    <li>Jupyter Notebooks</li>
+                    <li>Spyder IDE</li>
+                    <li>Numerose librerie pre-installate</li>
+                </ul>
+
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-terminal"></i> Avvio di Anaconda Navigator
+                    </div>
+                    <pre><code>/opt/anaconda3/bin/anaconda-navigator</code></pre>
+                </div>
+            </div>
+
+            <div id="jupyter" class="subsection">
+                <h3><i class="fas fa-book"></i> Jupyter Notebook</h3>
+                <p>Jupyter Notebook è un'applicazione web interattiva che permette di creare e condividere documenti contenenti codice, equazioni, visualizzazioni e testo narrativo.</p>
+
+                <h4>Caratteristiche Principali</h4>
+                <ul>
+                    <li><strong>File .ipynb:</strong> Contengono testo e codice eseguibile</li>
+                    <li><strong>Celle:</strong> Possono essere di tipo <em>Markdown</em> (testo) o <em>Code</em> (codice Python)</li>
+                    <li><strong>Architettura client-server:</strong> Funziona nel browser web</li>
+                    <li><strong>Kernel condiviso:</strong> Tutte le celle condividono lo stesso spazio di memoria</li>
+                </ul>
+
+                <div class="info-box tip">
+                    <i class="fas fa-keyboard"></i>
+                    <div>
+                        <strong>Shortcuts Utili:</strong>
+                        <ul>
+                            <li><code>Ctrl+Enter</code>: Esegue la cella corrente</li>
+                            <li><code>Enter</code>: Entra in modalità Edit</li>
+                            <li><code>Esc</code>: Entra in modalità Command</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Attenzione:</strong> In modalità Command sono attivi molti shortcuts. Evita di digitare per non modificare accidentalmente le celle.
+                    </div>
+                </div>
+            </div>
+
+            <div id="spyder" class="subsection">
+                <h3><i class="fas fa-code"></i> Spyder IDE</h3>
+                <p>Spyder è un ambiente di sviluppo integrato per Python, particolarmente adatto per sviluppo scientifico e data analysis.</p>
+
+                <h4>Interfaccia Spyder</h4>
+                <ul>
+                    <li><strong>Pannello Editor:</strong> A sinistra, per scrivere codice</li>
+                    <li><strong>Console IPython:</strong> In basso a destra, per esecuzione interattiva</li>
+                    <li><strong>Pannello ausiliario:</strong> In alto a destra, con diverse tab</li>
+                </ul>
+
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-keyboard"></i> Shortcuts Spyder
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Shortcut</th>
+                                <th>Funzione</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>F5</code></td>
+                                <td>Esegue tutto il file</td>
+                            </tr>
+                            <tr>
+                                <td><code>Ctrl+Enter</code></td>
+                                <td>Esegue la cella corrente</td>
+                            </tr>
+                            <tr>
+                                <td><code>F9</code></td>
+                                <td>Esegue la riga corrente</td>
+                            </tr>
+                            <tr>
+                                <td><code>Ctrl+C</code></td>
+                                <td>Interrompe l'esecuzione</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strutture Dati Section -->
+        <section id="strutture" class="section fade-in">
+            <h2 class="section-title"><i class="fas fa-database"></i> Strutture Dati in Python</h2>
+
+            <div class="highlight-box">
+                <h3>Padroneggia le Strutture Dati</h3>
+                <p>Le strutture dati sono il fondamento della programmazione efficace. Impara a utilizzare sequenze, liste, tuple, set e dizionari.</p>
+            </div>
+
+            <div id="sequenze" class="subsection">
+                <h3><i class="fas fa-list-ol"></i> Sequenze</h3>
+                <p>Le sequenze sono collezioni ordinate di elementi. Python offre diversi tipi di sequenze, ognuna con caratteristiche specifiche.</p>
+
+                <h4>Accesso agli Elementi</h4>
+                <p>L'accesso agli elementi avviene tramite <strong>indicizzazione</strong> con parentesi quadre:</p>
+                <pre><code>aSeq[i]  # Ritorna l'i-esimo elemento della sequenza</code></pre>
+
+                <div class="info-box note">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Indicizzazione:</strong> Gli indici iniziano da 0. Gli indici negativi partono dalla fine: <code>aSeq[-1]</code> è l'ultimo elemento.
+                    </div>
+                </div>
+
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-code"></i> Esempi di Indicizzazione
+                    </div>
+                    <pre><code>ls = [1, 2, 3, 4]
+# Elemento 1: indice 0 o -4
+# Elemento 2: indice 1 o -3
+# Elemento 3: indice 2 o -2
+# Elemento 4: indice 3 o -1</code></pre>
+                </div>
+
+                <h4>Operazioni Comuni</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operazione</th>
+                            <th>Sintassi</th>
+                            <th>Descrizione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Concatenazione</td>
+                            <td><code>seq1 + seq2</code></td>
+                            <td>Unisce due sequenze dello stesso tipo</td>
+                        </tr>
+                        <tr>
+                            <td>Ripetizione</td>
+                            <td><code>seq * n</code></td>
+                            <td>Ripete la sequenza n volte</td>
+                        </tr>
+                        <tr>
+                            <td>Appartenenza</td>
+                            <td><code>x in seq</code></td>
+                            <td>Verifica se x è nella sequenza</td>
+                        </tr>
+                        <tr>
+                            <td>Lunghezza</td>
+                            <td><code>len(seq)</code></td>
+                            <td>Ritorna il numero di elementi</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Funzioni Utili</h4>
+                <ul>
+                    <li><code>min(seq)</code> e <code>max(seq)</code>: Trovano minimo e massimo</li>
+                    <li><code>seq.index(x)</code>: Ritorna l'indice della prima occorrenza di x</li>
+                    <li><code>seq.count(x)</code>: Conta le occorrenze di x</li>
+                </ul>
+            </div>
+
+            <div id="stringhe" class="subsection">
+                <h3><i class="fas fa-quote-left"></i> Stringhe</h3>
+                <p>Le stringhe sono sequenze di caratteri. In Python non esiste il tipo "carattere" - esistono solo stringhe di lunghezza 1.</p>
+
+                <div class="info-box important">
+                    <i class="fas fa-lock"></i>
+                    <div>
+                        <strong>Immutabilità:</strong> Le stringhe sono immutabili - non possono essere modificate dopo la creazione.
+                    </div>
+                </div>
+
+                <h4>Tipi di Letterali Stringa</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Sintassi</th>
+                            <th>Uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Apici singoli</td>
+                            <td><code>'stringa'</code></td>
+                            <td>Uso generale</td>
+                        </tr>
+                        <tr>
+                            <td>Apici doppi</td>
+                            <td><code>"stringa"</code></td>
+                            <td>Quando serve apice singolo interno</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-linea</td>
+                            <td><code>'''stringa'''</code></td>
+                            <td>Testo su più righe</td>
+                        </tr>
+                        <tr>
+                            <td>Raw string</td>
+                            <td><code>r'path\to\file'</code></td>
+                            <td>Evita interpretazione caratteri escape</td>
+                        </tr>
+                        <tr>
+                            <td>f-string</td>
+                            <td><code>f'Ciao {nome}!'</code></td>
+                            <td>Interpolazione di variabili</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Caratteri Speciali</h4>
+                <ul>
+                    <li><code>\n</code>: Nuova riga</li>
+                    <li><code>\t</code>: Tab</li>
+                    <li><code>\\</code>: Backslash letterale</li>
+                    <li><code>\'</code> e <code>\"</code>: Apici letterali</li>
+                </ul>
+
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-code"></i> Esempi di Stringhe
+                    </div>
+                    <pre><code># Stringhe multi-linea
+testo = '''Questa è una
+    stringa
+su tre righe'''
+
+# Raw string
+percorso = r'C:\Users\nome\file.txt'
+
+# f-string
+nome = "Mario"
+messaggio = f'Ciao {nome}!'
+
+# Concatenazione automatica
+risultato = "prima" "seconda"  # "primaseconda"</code></pre>
+                </div>
+
+                <div class="info-box note">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Concatenazione automatica:</strong> Stringhe consecutive vengono automaticamente concatenate in Python.
+                    </div>
+                </div>
+            </div>
+
+            <div id="slicing" class="subsection">
+                <h3><i class="fas fa-cut"></i> Slicing</h3>
+                <p>Lo slicing permette di estrarre porzioni di sequenze creando nuove sequenze.</p>
+
+                <h4>Sintassi Completa</h4>
+                <pre><code>sequenza[inizio:fine:passo]</code></pre>
+
+                <ul>
+                    <li><strong>inizio:</strong> Indice di partenza (incluso)</li>
+                    <li><strong>fine:</strong> Indice di fine (escluso)</li>
+                    <li><strong>passo:</strong> Incremento (default: 1)</li>
+                </ul>
+
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-code"></i> Esempi di Slicing
+                    </div>
+                    <pre><code>s = "abcdefg"
+
+# Esempi base
+s[1:4]     # "bcd"
+s[:3]      # "abc" (dall'inizio)
+s[2:]      # "cdefg" (fino alla fine)
+s[:]       # "abcdefg" (copia completa)
+
+# Con passo
+s[::2]     # "aceg" (elementi pari)
+s[1::2]    # "bdf" (elementi dispari)
+
+# Slicing inverso
+s[::-1]    # "gfedcba" (stringa invertita)
+s[5:1:-1]  # "fedc" (da destra a sinistra)</code></pre>
+                </div>
+
+                <div class="info-box tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <strong>Slicing crea nuove sequenze:</strong> L'operazione di slicing genera sempre una nuova sequenza, non modifica quella originale.
+                    </div>
+                </div>
+            </div>
+
+            <div id="liste" class="subsection">
+                <h3><i class="fas fa-list"></i> Liste</h3>
+                <p>Le liste sono sequenze mutabili che possono contenere elementi di qualsiasi tipo.</p>
+
+                <div class="info-box tip">
+                    <i class="fas fa-edit"></i>
+                    <div>
+                        <strong>Mutabilità:</strong> Le liste possono essere modificate dopo la creazione - si possono aggiungere, rimuovere o modificare elementi.
+                    </div>
+                </div>
+
+                <h4>Creazione di Liste</h4>
+                <pre><code># Lista con elementi
+numeri = [1, 2, 3, 4, 5]
+
+# Lista mista (sconsigliata)
+mista = [1, "due", 3.0, [4, 5]]
+
+# Lista vuota
+vuota = []
+
+# Da stringa
+caratteri = list("python")  # ['p', 'y', 't', 'h', 'o', 'n']</code></pre>
+
+                <h4>Metodi Principali</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metodo</th>
+                            <th>Descrizione</th>
+                            <th>Esempio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>append(x)</code></td>
+                            <td>Aggiunge elemento alla fine</td>
+                            <td><code>lista.append(6)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>extend(seq)</code></td>
+                            <td>Aggiunge tutti gli elementi di seq</td>
+                            <td><code>lista.extend([7, 8])</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>insert(i, x)</code></td>
+                            <td>Inserisce elemento alla posizione i</td>
+                            <td><code>lista.insert(0, 0)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>remove(x)</code></td>
+                            <td>Rimuove prima occorrenza di x</td>
+                            <td><code>lista.remove(3)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>pop(i)</code></td>
+                            <td>Rimuove e ritorna elemento all'indice i</td>
+                            <td><code>elemento = lista.pop()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>clear()</code></td>
+                            <td>Rimuove tutti gli elementi</td>
+                            <td><code>lista.clear()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>sort()</code></td>
+                            <td>Ordina la lista</td>
+                            <td><code>lista.sort()</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>reverse()</code></td>
+                            <td>Inverte l'ordine</td>
+                            <td><code>lista.reverse()</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Unpacking con Asterisco</h4>
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-code"></i> Esempi di Unpacking
+                    </div>
+                    <pre><code>numeri = [1, 2, 3, 4, 5]
+
+# Unpacking base
+primo, secondo = [1, 2]
+
+# Con asterisco
+primo, *resto = numeri          # primo=1, resto=[2,3,4,5]
+*inizio, ultimo = numeri        # inizio=[1,2,3,4], ultimo=5
+primo, *mezzo, ultimo = numeri  # primo=1, mezzo=[2,3,4], ultimo=5</code></pre>
+                </div>
+
+                <h4>Assegnamento a Slice</h4>
+                <p>Le liste supportano l'assegnamento diretto a slice, permettendo di modificare porzioni della lista:</p>
+                <pre><code>lista = [1, 2, 3, 4, 5]
+
+# Sostituisce elementi
+lista[1:4] = [7, 8]      # [1, 7, 8, 5]
+
+# Cambia lunghezza
+lista[2:] = [9, 10, 11]  # [1, 7, 9, 10, 11]
+
+# Slice esteso (passo > 1)
+lista[::2] = [0, 0, 0]   # Sostituisce elementi a posizioni pari</code></pre>
+
+                <div class="info-box warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Attenzione ai riferimenti:</strong> Assegnare una lista a un'altra variabile crea un riferimento, non una copia. Usa <code>lista[:]</code> o <code>lista.copy()</code> per creare una copia.
+                    </div>
+                </div>
+            </div>
+
+            <div id="tuple" class="subsection">
+                <h3><i class="fas fa-link"></i> Tuple</h3>
+                <p>Le tuple sono sequenze immutabili, spesso utilizzate per dati eterogenei.</p>
+
+                <div class="info-box important">
+                    <i class="fas fa-lock"></i>
+                    <div>
+                        <strong>Immutabilità:</strong> Le tuple non possono essere modificate dopo la creazione, ma possono contenere elementi mutabili.
+                    </div>
+                </div>
+
+                <h4>Creazione di Tuple</h4>
+                <pre><code># Con parentesi
+coordinate = (10, 20)
+persona = ("Mario", 30, "Roma")
+
+# Senza parentesi
+punto = 1, 2, 3
+
+# Tupla vuota
+vuota = ()
+
+# Tupla con un elemento (nota la virgola!)
+singleton = (42,)
+
+# Da lista
+da_lista = tuple([1, 2, 3])</code></pre>
+
+                <div class="info-box warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Tupla singleton:</strong> Per creare una tupla con un elemento, serve la virgola finale: <code>(42,)</code>. Altrimenti <code>(42)</code> è solo un numero tra parentesi.
+                    </div>
+                </div>
+
+                <h4>Utilizzo delle Tuple</h4>
+                <ul>
+                    <li><strong>Coordinate:</strong> <code>(x, y, z)</code></li>
+                    <li><strong>Dati eterogenei:</strong> <code>(nome, età, città)</code></li>
+                    <li><strong>Chiavi di dizionario:</strong> Se contengono solo dati immutabili</li>
+                    <li><strong>Valori di ritorno multipli:</strong> <code>return nome, età</code></li>
+                </ul>
+            </div>
+
+            <div id="set" class="subsection">
+                <h3><i class="fas fa-circle"></i> Set</h3>
+                <p>I set sono collezioni non ordinate di elementi unici, utili per operazioni insiemistiche.</p>
+
+                <h4>Creazione di Set</h4>
+                <pre><code># Con parentesi graffe
+numeri = {1, 2, 3, 4, 5}
+
+# Rimuove duplicati automaticamente
+unici = {1, 2, 3, 2, 3, 1}  # {1, 2, 3}
+
+# Set vuoto (non {})
+vuoto = set()
+
+# Da lista
+da_lista = set([1, 2, 2, 3])  # {1, 2, 3}</code></pre>
+
+                <div class="info-box note">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Set vuoto:</strong> <code>{}</code> crea un dizionario vuoto, non un set. Per un set vuoto usa <code>set()</code>.
+                    </div>
+                </div>
+
+                <h4>Operazioni Insiemistiche</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operazione</th>
+                            <th>Operatore</th>
+                            <th>Metodo</th>
+                            <th>Descrizione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Unione</td>
+                            <td><code>|</code></td>
+                            <td><code>union()</code></td>
+                            <td>Elementi in almeno uno dei set</td>
+                        </tr>
+                        <tr>
+                            <td>Intersezione</td>
+                            <td><code>&</code></td>
+                            <td><code>intersection()</code></td>
+                            <td>Elementi in entrambi i set</td>
+                        </tr>
+                        <tr>
+                            <td>Differenza</td>
+                            <td><code>-</code></td>
+                            <td><code>difference()</code></td>
+                            <td>Elementi nel primo ma non nel secondo</td>
+                        </tr>
+                        <tr>
+                            <td>Diff. simmetrica</td>
+                            <td><code>^</code></td>
+                            <td><code>symmetric_difference()</code></td>
+                            <td>Elementi in uno solo dei due set</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-code"></i> Esempi di Operazioni su Set
+                    </div>
+                    <pre><code>set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+print(set1 | set2)  # {1, 2, 3, 4, 5, 6} - Unione
+print(set1 & set2)  # {3, 4} - Intersezione
+print(set1 - set2)  # {1, 2} - Differenza
+print(set1 ^ set2)  # {1, 2, 5, 6} - Differenza simmetrica</code></pre>
+                </div>
+            </div>
+
+            <div id="dizionari" class="subsection">
+                <h3><i class="fas fa-key"></i> Dizionari</h3>
+                <p>I dizionari sono collezioni di coppie chiave-valore, ottimizzate per l'accesso rapido tramite chiave.</p>
+
+                <div class="info-box important">
+                    <i class="fas fa-key"></i>
+                    <div>
+                        <strong>Chiavi hashable:</strong> Le chiavi devono essere immutabili e contenere solo oggetti immutabili (hashable).
+                    </div>
+                </div>
+
+                <h4>Creazione di Dizionari</h4>
+                <pre><code># Sintassi base
+studente = {
+    "nome": "Mario",
+    "età": 20,
+    "corso": "Informatica"
+}
+
+# Dizionario vuoto
+vuoto = {}
+
+# Con funzione dict()
+da_coppie = dict([('a', 1), ('b', 2)])
+con_keywords = dict(nome="Mario", età=20)</code></pre>
+
+                <h4>Accesso e Modifica</h4>
+                <pre><code># Accesso
+print(studente["nome"])        # Mario
+print(studente.get("voto", 0)) # 0 (default se chiave non esiste)
+
+# Modifica
+studente["voto"] = 28
+studente["età"] = 21
+
+# Verifica esistenza
+if "nome" in studente:
+    print("Nome presente")</code></pre>
+
+                <h4>Metodi Principali</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metodo</th>
+                            <th>Descrizione</th>
+                            <th>Esempio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>keys()</code></td>
+                            <td>Ritorna le chiavi</td>
+                            <td><code>list(dict.keys())</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>values()</code></td>
+                            <td>Ritorna i valori</td>
+                            <td><code>list(dict.values())</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>items()</code></td>
+                            <td>Ritorna coppie chiave-valore</td>
+                            <td><code>list(dict.items())</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>get(key, default)</code></td>
+                            <td>Accesso sicuro con default</td>
+                            <td><code>dict.get("chiave", "N/A")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>pop(key)</code></td>
+                            <td>Rimuove e ritorna valore</td>
+                            <td><code>valore = dict.pop("chiave")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>update(other)</code></td>
+                            <td>Aggiorna con altro dizionario</td>
+                            <td><code>dict.update({"nuovo": "valore"})</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Iterazione</h4>
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-code"></i> Modi di Iterare sui Dizionari
+                    </div>
+                    <pre><code># Sulle chiavi (default)
+for chiave in dizionario:
+    print(chiave)
+
+# Su chiavi e valori
+for chiave, valore in dizionario.items():
+    print(f"{chiave}: {valore}")
+
+# Solo sui valori
+for valore in dizionario.values():
+    print(valore)</code></pre>
+                </div>
+
+                <div class="info-box note">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Concetto di Hashable:</strong> Un oggetto è hashable se è immutabile e contiene solo oggetti immutabili. Le tuple sono hashable solo se tutti i loro elementi lo sono.
+                    </div>
+                </div>
+            </div>
+
+            <div id="conversioni" class="subsection">
+                <h3><i class="fas fa-exchange-alt"></i> Funzioni di Conversione</h3>
+                <p>Le funzioni di conversione creano nuovi oggetti del tipo desiderato senza modificare quelli originali.</p>
+
+                <div class="info-box important">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Importante:</strong> Le funzioni di conversione non modificano l'oggetto originale, ma creano un nuovo oggetto del tipo richiesto.
+                    </div>
+                </div>
+
+                <h4>Conversioni Principali</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Funzione</th>
+                            <th>Da</th>
+                            <th>A</th>
+                            <th>Esempio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>int()</code></td>
+                            <td>str, float, bool</td>
+                            <td>int</td>
+                            <td><code>int("42")</code> → <code>42</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>float()</code></td>
+                            <td>str, int, bool</td>
+                            <td>float</td>
+                            <td><code>float("3.14")</code> → <code>3.14</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>str()</code></td>
+                            <td>qualsiasi</td>
+                            <td>str</td>
+                            <td><code>str([1,2,3])</code> → <code>"[1, 2, 3]"</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>list()</code></td>
+                            <td>str, tuple, set</td>
+                            <td>list</td>
+                            <td><code>list("abc")</code> → <code>['a', 'b', 'c']</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>tuple()</code></td>
+                            <td>str, list, set</td>
+                            <td>tuple</td>
+                            <td><code>tuple([1,2,3])</code> → <code>(1, 2, 3)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>set()</code></td>
+                            <td>str, list, tuple</td>
+                            <td>set</td>
+                            <td><code>set([1,1,2])</code> → <code>{1, 2}</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>dict()</code></td>
+                            <td>liste di coppie</td>
+                            <td>dict</td>
+                            <td><code>dict([('a',1), ('b',2)])</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Conversioni Speciali</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Funzione</th>
+                            <th>Descrizione</th>
+                            <th>Esempio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>ord()</code></td>
+                            <td>Carattere → codice ASCII</td>
+                            <td><code>ord('A')</code> → <code>65</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>chr()</code></td>
+                            <td>Codice ASCII → carattere</td>
+                            <td><code>chr(65)</code> → <code>'A'</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>hex()</code></td>
+                            <td>Intero → esadecimale</td>
+                            <td><code>hex(255)</code> → <code>'0xff'</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>bin()</code></td>
+                            <td>Intero → binario</td>
+                            <td><code>bin(8)</code> → <code>'0b1000'</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>oct()</code></td>
+                            <td>Intero → ottale</td>
+                            <td><code>oct(8)</code> → <code>'0o10'</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example">
+                    <div class="example-title">
+                        <i class="fas fa-code"></i> Esempi di Conversioni
+                    </div>
+                    <pre><code># Conversioni numeriche
+print(float(True))    # 1.0
+print(int("321") + 4) # 325
+
+# Conversioni di strutture dati
+print(list({'a': 1, 'b': 2}))  # ['a', 'b'] (solo chiavi)
+print(list("PYTHON"))          # ['P', 'Y', 'T', 'H', 'O', 'N']
+
+# Conversioni speciali
+print(hex(20))  # 0x14
+print(chr(69))  # E</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusione -->
+        <section class="section fade-in">
+            <h2 class="section-title"><i class="fas fa-flag-checkered"></i> Conclusioni</h2>
+
+            <div class="highlight-box">
+                <h3>Complimenti!</h3>
+                <p>Hai completato la guida introduttiva a Python e alle sue strutture dati. Ora hai le basi per iniziare a programmare in Python con fiducia!</p>
+            </div>
+
+            <div class="subsection">
+                <h3><i class="fas fa-lightbulb"></i> Prossimi Passi</h3>
+                <ul>
+                    <li>Pratica con gli esercizi sui file Python forniti</li>
+                    <li>Sperimenta con Jupyter Notebooks e Spyder</li>
+                    <li>Approfondisci la programmazione funzionale</li>
+                    <li>Esplora le librerie Python per i tuoi interessi specifici</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3><i class="fas fa-book"></i> Risorse Aggiuntive</h3>
+                <ul>
+                    <li><strong>"Programmare con Python Guida completa"</strong> di Marco Buttu</li>
+                    <li><strong>"Functional Python Programming"</strong> di Steven Lott</li>
+                    <li><strong>Documentazione ufficiale Python:</strong> <a href="https://docs.python.org/3/">docs.python.org</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = scrollPercent * 100 + '%';
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Code block copy functionality
+        document.querySelectorAll('pre').forEach(block => {
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.innerHTML = '<i class="fas fa-copy"></i>';
+            button.style.cssText = `
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 0.8rem;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+
+            block.style.position = 'relative';
+            block.appendChild(button);
+
+            block.addEventListener('mouseenter', () => {
+                button.style.opacity = '1';
+            });
+
+            block.addEventListener('mouseleave', () => {
+                button.style.opacity = '0';
+            });
+
+            button.addEventListener('click', () => {
+                const code = block.querySelector('code');
+                navigator.clipboard.writeText(code.textContent);
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-copy"></i>';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
