@@ -5,779 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guida Completa Python - Introduzione e Strutture Dati</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --purple-color: #9b59b6;
-            --dark-blue: #34495e;
-            --python-blue: #3776ab;
-            --python-yellow: #ffd343;
-            --light-bg: #ecf0f1;
-            --white: #ffffff;
-            --text-color: #2c3e50;
-            --text-light: #7f8c8d;
-            --border-color: #e0e6ed;
-            --code-bg: #f8f9fa;
-            --code-border: #e9ecef;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background: var(--light-bg);
-            overflow-x: hidden;
-        }
-
-        /* Header Styles - Uguale alla homepage */
-        header {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            transition: transform 0.3s ease;
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            position: relative;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text-color);
-            z-index: 1001;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--python-blue);
-            font-size: 2rem;
-        }
-
-        .logo h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.6rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links a:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-1px);
-        }
-
-        .nav-links a i {
-            font-size: 0.85rem;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            cursor: pointer;
-            z-index: 1001;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-menu-toggle:hover {
-            color: var(--primary-color);
-        }
-
-        .mobile-menu {
-            display: none;
-            background: var(--white);
-            border-top: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            display: block;
-            max-height: 400px;
-        }
-
-        .mobile-nav-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            padding: 1rem 0;
-            margin: 0;
-        }
-
-        .mobile-nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            padding: 1rem 2rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            border-left: 3px solid transparent;
-        }
-
-        .mobile-nav-links a:hover,
-        .mobile-nav-links a:focus {
-            background: rgba(52, 152, 219, 0.1);
-            color: var(--primary-color);
-            border-left-color: var(--primary-color);
-        }
-
-        /* Main Content */
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        /* Table of Contents - Migliorata */
-        .toc {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-
-        .toc h2 {
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-        }
-
-        .toc-sections {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .toc-section {
-            background: var(--light-bg);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .toc-section-title {
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toc-section-title i {
-            color: var(--primary-color);
-            font-size: 1rem;
-        }
-
-        .toc-list {
-            list-style: none;
-            display: grid;
-            gap: 0.5rem;
-        }
-
-        .toc-item a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-size: 0.95rem;
-            padding: 0.5rem 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .toc-item a:hover {
-            background: var(--white);
-            color: var(--primary-color);
-            padding-left: 1rem;
-        }
-
-        .toc-item a i {
-            font-size: 0.8rem;
-            color: var(--primary-color);
-        }
-
-        /* Sections */
-        .section {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-
-        .section-title {
-            color: var(--secondary-color);
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 700;
-        }
-
-        .section-title i {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-        }
-
-        .subsection {
-            margin-bottom: 2rem;
-        }
-
-        .subsection h3 {
-            color: var(--secondary-color);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-        }
-
-        .subsection h3 i {
-            color: var(--success-color);
-            font-size: 1.1rem;
-        }
-
-        .subsection h4 {
-            color: var(--dark-blue);
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            margin-top: 1.25rem;
-            font-weight: 600;
-        }
-
-        /* Text Styles */
-        p {
-            margin-bottom: 1rem;
-            color: var(--text-color);
-            line-height: 1.7;
-        }
-
-        /* Lists */
-        ul, ol {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-            line-height: 1.7;
-        }
-
-        /* Code Blocks */
-        code {
-            background: var(--code-bg);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            border: 1px solid var(--code-border);
-            word-break: break-word;
-        }
-
-        pre {
-            background: var(--code-bg);
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1rem 0;
-            border: 1px solid var(--code-border);
-            position: relative;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
-            border: none;
-            color: var(--text-color);
-            font-size: 0.85rem;
-            line-height: 1.5;
-            display: block;
-            word-break: normal;
-        }
-
-        /* Info Boxes */
-        .info-box {
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            border-left: 4px solid;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-
-        .info-box i {
-            font-size: 1.1rem;
-            margin-top: 0.2rem;
-            flex-shrink: 0;
-        }
-
-        .info-box.note {
-            background: rgba(52, 152, 219, 0.1);
-            border-left-color: var(--primary-color);
-        }
-
-        .info-box.note,
-        .info-box.note strong {
-            color: var(--primary-color);
-        }
-
-        .info-box.warning {
-            background: rgba(243, 156, 18, 0.1);
-            border-left-color: var(--warning-color);
-        }
-
-        .info-box.warning,
-        .info-box.warning strong {
-            color: var(--warning-color);
-        }
-
-        .info-box.tip {
-            background: rgba(39, 174, 96, 0.1);
-            border-left-color: var(--success-color);
-        }
-
-        .info-box.tip,
-        .info-box.tip strong {
-            color: var(--success-color);
-        }
-
-        .info-box.important {
-            background: rgba(231, 76, 60, 0.1);
-            border-left-color: var(--accent-color);
-        }
-
-        .info-box.important,
-        .info-box.important strong {
-            color: var(--accent-color);
-        }
-
-        /* Tables */
-        .table-wrapper {
-            overflow-x: auto;
-            margin: 1rem 0;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        table {
-            width: 100%;
-            min-width: 500px;
-            border-collapse: collapse;
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        th, td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background: var(--primary-color);
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-
-        td {
-            font-size: 0.9rem;
-        }
-
-        tr:hover {
-            background: var(--light-bg);
-        }
-
-        /* Highlight Boxes */
-        .highlight-box {
-            background: var(--primary-color);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-
-        .highlight-box h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-        }
-
-        .highlight-box p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            margin-bottom: 0;
-        }
-
-        /* Examples */
-        .example {
-            background: var(--light-bg);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border: 1px solid var(--border-color);
-        }
-
-        .example-title {
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .example-title i {
-            color: var(--success-color);
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: var(--primary-color);
-            z-index: 1001;
-            transition: width 0.3s ease;
-        }
-
-        /* Copy Button */
-        .copy-button {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 0.75rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        pre:hover .copy-button {
-            opacity: 1;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .logo h1 {
-                font-size: 1.2rem;
-            }
-
-            .logo-icon {
-                width: 35px;
-                height: 35px;
-                font-size: 1.8rem;
-            }
-
-            .navbar {
-                padding: 0.8rem 0;
-            }
-
-            .main-content {
-                padding: 1rem 0.75rem;
-            }
-
-            .section {
-                padding: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .toc {
-                padding: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .toc h2 {
-                font-size: 1.3rem;
-            }
-
-            .toc-section {
-                padding: 0.75rem;
-            }
-
-            .toc-section-title {
-                font-size: 1rem;
-            }
-
-            .toc-item a {
-                font-size: 0.9rem;
-                padding: 0.4rem 0.5rem;
-            }
-
-            .section-title {
-                font-size: 1.4rem;
-                gap: 0.5rem;
-            }
-
-            .section-title i {
-                font-size: 1.2rem;
-            }
-
-            .subsection h3 {
-                font-size: 1.2rem;
-            }
-
-            .subsection h4 {
-                font-size: 1rem;
-            }
-
-            ul, ol {
-                padding-left: 1.25rem;
-            }
-
-            .info-box {
-                padding: 0.75rem;
-                gap: 0.5rem;
-            }
-
-            .info-box i {
-                font-size: 1rem;
-            }
-
-            pre {
-                padding: 0.75rem;
-                font-size: 0.8rem;
-            }
-
-            code {
-                font-size: 0.8rem;
-            }
-
-            th, td {
-                padding: 0.5rem;
-                font-size: 0.85rem;
-            }
-
-            .highlight-box {
-                padding: 1.25rem;
-            }
-
-            .highlight-box h3 {
-                font-size: 1.1rem;
-            }
-
-            .highlight-box p {
-                font-size: 0.95rem;
-            }
-
-            .example {
-                padding: 0.75rem;
-            }
-
-            .header-container {
-                padding: 0 0.75rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo h1 {
-                font-size: 1.1rem;
-            }
-
-            .logo-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 1.6rem;
-            }
-
-            .main-content {
-                padding: 0.75rem 0.5rem;
-            }
-
-            .section {
-                padding: 1.25rem;
-                border-radius: 8px;
-            }
-
-            .toc {
-                padding: 1.25rem;
-                border-radius: 8px;
-            }
-
-            .section-title {
-                font-size: 1.25rem;
-            }
-
-            .subsection h3 {
-                font-size: 1.1rem;
-            }
-
-            .subsection {
-                margin-bottom: 1.5rem;
-            }
-
-            p {
-                font-size: 0.95rem;
-            }
-
-            li {
-                font-size: 0.95rem;
-            }
-
-            .header-container {
-                padding: 0 0.5rem;
-            }
-        }
-
-        /* Dark mode scrollbar for code blocks */
-        pre::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        pre::-webkit-scrollbar-track {
-            background: var(--code-bg);
-            border-radius: 4px;
-        }
-
-        pre::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-
-        pre::-webkit-scrollbar-thumb:hover {
-            background: var(--text-light);
-        }
-
-        /* Animation classes */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="progress-bar" id="progress-bar"></div>
-
     <!-- Header -->
     <header>
         <div class="header-container">
             <nav class="navbar">
-                <a href="../index.html" class="logo">
+                <a href="../../index.html" class="logo">
                     <div class="logo-icon">
                         <i class="fab fa-python"></i>
                     </div>
                     <h1>Python Tutorial</h1>
                 </a>
 
-                <!-- Desktop Navigation -->
                 <ul class="nav-links">
-                    <li><a href="#toc"><i class="fas fa-bookmark"></i> Indice</a></li>
+                    <li><a href="#" id="sidebarToggle"><i class="fas fa-list"></i> Indice</a></li>
                     <li><a href="#intro"><i class="fas fa-rocket"></i> Intro</a></li>
                     <li><a href="#strutture"><i class="fas fa-database"></i> Strutture</a></li>
-                    <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
                 </ul>
 
-                <!-- Mobile Menu Toggle -->
                 <button class="mobile-menu-toggle" aria-label="Menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
 
-            <!-- Mobile Menu -->
             <div class="mobile-menu" id="mobileMenu">
                 <ul class="mobile-nav-links">
-                    <li><a href="#toc"><i class="fas fa-bookmark"></i> Indice</a></li>
+                    <li><a href="#" id="sidebarToggleMobile"><i class="fas fa-list"></i> Indice</a></li>
                     <li><a href="#intro"><i class="fas fa-rocket"></i> Introduzione</a></li>
                     <li><a href="#strutture"><i class="fas fa-database"></i> Strutture Dati</a></li>
                     <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
@@ -786,63 +42,106 @@
         </div>
     </header>
 
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-bookmark"></i> Indice dei Contenuti</h3>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-content">
+            <!-- Introduzione Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-header" data-section="intro-section">
+                    <i class="fas fa-rocket"></i>
+                    <span>Introduzione</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sidebar-list" id="intro-section">
+                    <li><a href="#intro"><i class="fas fa-chevron-right"></i> Introduzione a Python</a></li>
+                    <li><a href="#obiettivi"><i class="fas fa-chevron-right"></i> Obiettivi del Corso</a></li>
+                    <li><a href="#storia"><i class="fas fa-chevron-right"></i> Storia di Python</a></li>
+                </ul>
+            </div>
+
+            <!-- Strumenti Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-header" data-section="tools-section">
+                    <i class="fas fa-tools"></i>
+                    <span>Strumenti di Sviluppo</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sidebar-list" id="tools-section">
+                    <li><a href="#strumenti"><i class="fas fa-chevron-right"></i> Anaconda Distribution</a></li>
+                    <li><a href="#jupyter"><i class="fas fa-chevron-right"></i> Jupyter Notebook</a></li>
+                    <li><a href="#spyder"><i class="fas fa-chevron-right"></i> Spyder IDE</a></li>
+                </ul>
+            </div>
+
+            <!-- Strutture Dati Section -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-header" data-section="data-section">
+                    <i class="fas fa-database"></i>
+                    <span>Strutture Dati</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="sidebar-list" id="data-section">
+                    <li><a href="#sequenze"><i class="fas fa-chevron-right"></i> Sequenze</a></li>
+                    <li><a href="#stringhe"><i class="fas fa-chevron-right"></i> Stringhe</a></li>
+                    <li><a href="#slicing"><i class="fas fa-chevron-right"></i> Slicing</a></li>
+                    <li><a href="#liste"><i class="fas fa-chevron-right"></i> Liste</a></li>
+                    <li><a href="#tuple"><i class="fas fa-chevron-right"></i> Tuple</a></li>
+                    <li><a href="#set"><i class="fas fa-chevron-right"></i> Set</a></li>
+                    <li><a href="#dizionari"><i class="fas fa-chevron-right"></i> Dizionari</a></li>
+                    <li><a href="#conversioni"><i class="fas fa-chevron-right"></i> Conversioni</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Table of Contents - Migliorata -->
-        <section id="toc" class="toc fade-in">
-            <h2><i class="fas fa-bookmark"></i> Indice dei Contenuti</h2>
-
-            <div class="toc-sections">
-                <!-- Introduzione Section -->
-                <div class="toc-section">
-                    <div class="toc-section-title">
-                        <i class="fas fa-rocket"></i> Introduzione
-                    </div>
-                    <ul class="toc-list">
-                        <li class="toc-item"><a href="#intro"><i class="fas fa-chevron-right"></i> Introduzione a Python</a></li>
-                        <li class="toc-item"><a href="#obiettivi"><i class="fas fa-chevron-right"></i> Obiettivi del Corso</a></li>
-                        <li class="toc-item"><a href="#storia"><i class="fas fa-chevron-right"></i> Storia di Python</a></li>
-                    </ul>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1><i class="fab fa-python"></i> Programmazione in Python</h1>
+                <p class="hero-subtitle">Guida completa alla programmazione funzionale e alle strutture dati</p>
+                <div class="hero-description">
+                    <p>Impara Python dalle basi: dalla sintassi fondamentale alle strutture dati avanzate.
+                    Questa guida ti accompagnerà nel mondo della programmazione funzionale con esempi pratici
+                    e spiegazioni dettagliate.</p>
                 </div>
-
-                <!-- Strumenti Section -->
-                <div class="toc-section">
-                    <div class="toc-section-title">
-                        <i class="fas fa-tools"></i> Strumenti di Sviluppo
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="fas fa-rocket"></i>
+                        <span>Concetti Base</span>
                     </div>
-                    <ul class="toc-list">
-                        <li class="toc-item"><a href="#strumenti"><i class="fas fa-chevron-right"></i> Anaconda Distribution</a></li>
-                        <li class="toc-item"><a href="#jupyter"><i class="fas fa-chevron-right"></i> Jupyter Notebook</a></li>
-                        <li class="toc-item"><a href="#spyder"><i class="fas fa-chevron-right"></i> Spyder IDE</a></li>
-                    </ul>
-                </div>
-
-                <!-- Strutture Dati Section -->
-                <div class="toc-section">
-                    <div class="toc-section-title">
-                        <i class="fas fa-database"></i> Strutture Dati
+                    <div class="feature">
+                        <i class="fas fa-tools"></i>
+                        <span>Strumenti Pratici</span>
                     </div>
-                    <ul class="toc-list">
-                        <li class="toc-item"><a href="#sequenze"><i class="fas fa-chevron-right"></i> Sequenze</a></li>
-                        <li class="toc-item"><a href="#stringhe"><i class="fas fa-chevron-right"></i> Stringhe</a></li>
-                        <li class="toc-item"><a href="#slicing"><i class="fas fa-chevron-right"></i> Slicing</a></li>
-                        <li class="toc-item"><a href="#liste"><i class="fas fa-chevron-right"></i> Liste</a></li>
-                        <li class="toc-item"><a href="#tuple"><i class="fas fa-chevron-right"></i> Tuple</a></li>
-                        <li class="toc-item"><a href="#set"><i class="fas fa-chevron-right"></i> Set</a></li>
-                        <li class="toc-item"><a href="#dizionari"><i class="fas fa-chevron-right"></i> Dizionari</a></li>
-                        <li class="toc-item"><a href="#conversioni"><i class="fas fa-chevron-right"></i> Conversioni</a></li>
-                    </ul>
+                    <div class="feature">
+                        <i class="fas fa-database"></i>
+                        <span>Strutture Dati</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-code"></i>
+                        <span>Esempi Pratici</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Introduzione Section -->
-        <section id="intro" class="section fade-in">
-            <h2 class="section-title"><i class="fas fa-rocket"></i> Introduzione a Python</h2>
-
-            <div class="highlight-box">
-                <h3>Benvenuto nel Mondo di Python!</h3>
-                <p>Scopri le basi della programmazione funzionale con Python, un linguaggio potente e versatile usato in tutto il mondo.</p>
+        <section id="intro" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-rocket"></i> Introduzione a Python</h2>
+                <p class="section-subtitle">Scopri le basi della programmazione funzionale con Python</p>
             </div>
 
             <div id="obiettivi" class="subsection">
@@ -891,8 +190,11 @@
         </section>
 
         <!-- Storia Python Section -->
-        <section id="storia" class="section fade-in">
-            <h2 class="section-title"><i class="fas fa-history"></i> Storia di Python</h2>
+        <section id="storia" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-history"></i> Storia di Python</h2>
+                <p class="section-subtitle">Le origini e l'evoluzione del linguaggio</p>
+            </div>
 
             <div class="subsection">
                 <h3><i class="fas fa-user"></i> Origini e Sviluppo</h3>
@@ -914,8 +216,11 @@
         </section>
 
         <!-- Strumenti Section -->
-        <section id="strumenti" class="section fade-in">
-            <h2 class="section-title"><i class="fas fa-tools"></i> Strumenti di Sviluppo</h2>
+        <section id="strumenti" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-tools"></i> Strumenti di Sviluppo</h2>
+                <p class="section-subtitle">Gli ambienti per programmare in Python</p>
+            </div>
 
             <div class="subsection">
                 <h3><i class="fas fa-box"></i> Anaconda Distribution</h3>
@@ -1015,12 +320,10 @@
         </section>
 
         <!-- Strutture Dati Section -->
-        <section id="strutture" class="section">
-            <h2 class="section-title"><i class="fas fa-database"></i> Strutture Dati in Python</h2>
-
-            <div class="highlight-box">
-                <h3>Padroneggia le Strutture Dati</h3>
-                <p>Le strutture dati sono il fondamento della programmazione efficace. Impara a utilizzare sequenze, liste, tuple, set e dizionari.</p>
+        <section id="strutture" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-database"></i> Strutture Dati in Python</h2>
+                <p class="section-subtitle">Le collezioni di dati e le loro caratteristiche</p>
             </div>
 
             <div id="sequenze" class="subsection">
@@ -1698,31 +1001,71 @@ print(chr(69))  # E</code></pre>
         </section>
 
         <!-- Conclusione -->
-        <section class="section fade-in">
-            <h2 class="section-title"><i class="fas fa-flag-checkered"></i> Conclusioni</h2>
-
-            <div class="highlight-box">
-                <h3>Complimenti!</h3>
-                <p>Hai completato la guida introduttiva a Python e alle sue strutture dati. Ora hai le basi per iniziare a programmare in Python con fiducia!</p>
+        <section class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-flag-checkered"></i> Conclusioni</h2>
+                <p class="section-subtitle">Il tuo percorso di apprendimento Python inizia qui</p>
             </div>
 
-            <div class="subsection">
-                <h3><i class="fas fa-lightbulb"></i> Prossimi Passi</h3>
-                <ul>
-                    <li>Pratica con gli esercizi sui file Python forniti</li>
-                    <li>Sperimenta con Jupyter Notebooks e Spyder</li>
-                    <li>Approfondisci la programmazione funzionale</li>
-                    <li>Esplora le librerie Python per i tuoi interessi specifici</li>
-                </ul>
-            </div>
+            <div class="conclusion-content">
+                <div class="achievement-box">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Complimenti!</h3>
+                    <p>Hai completato la guida introduttiva a Python e alle sue strutture dati. Ora hai le basi per iniziare a programmare in Python con fiducia!</p>
+                </div>
 
-            <div class="subsection">
-                <h3><i class="fas fa-book"></i> Risorse Aggiuntive</h3>
-                <ul>
-                    <li><strong>"Programmare con Python Guida completa"</strong> di Marco Buttu</li>
-                    <li><strong>"Functional Python Programming"</strong> di Steven Lott</li>
-                    <li><strong>Documentazione ufficiale Python:</strong> <a href="https://docs.python.org/3/" target="_blank">docs.python.org</a></li>
-                </ul>
+                <div class="next-steps">
+                    <h3><i class="fas fa-lightbulb"></i> Prossimi Passi</h3>
+                    <div class="steps-grid">
+                        <div class="step-card">
+                            <i class="fas fa-code"></i>
+                            <h4>Pratica</h4>
+                            <p>Sperimenta con gli esercizi e i file Python forniti</p>
+                        </div>
+                        <div class="step-card">
+                            <i class="fas fa-tools"></i>
+                            <h4>Strumenti</h4>
+                            <p>Familiarizza con Jupyter Notebooks e Spyder</p>
+                        </div>
+                        <div class="step-card">
+                            <i class="fas fa-function"></i>
+                            <h4>Funzionale</h4>
+                            <p>Approfondisci la programmazione funzionale</p>
+                        </div>
+                        <div class="step-card">
+                            <i class="fas fa-book"></i>
+                            <h4>Librerie</h4>
+                            <p>Esplora le librerie Python per i tuoi interessi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resources">
+                    <h3><i class="fas fa-book"></i> Risorse Aggiuntive</h3>
+                    <ul class="resources-list">
+                        <li>
+                            <i class="fas fa-book"></i>
+                            <div>
+                                <strong>"Programmare con Python Guida completa"</strong>
+                                <span>di Marco Buttu</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-book"></i>
+                            <div>
+                                <strong>"Functional Python Programming"</strong>
+                                <span>di Steven Lott</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <strong>Documentazione ufficiale Python</strong>
+                                <span><a href="https://docs.python.org/3/" target="_blank">docs.python.org</a></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
@@ -1761,37 +1104,82 @@ print(chr(69))  # E</code></pre>
             link.addEventListener('click', closeMobileMenu);
         });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-                closeMobileMenu();
+        // Sidebar functionality
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarToggleMobile = document.getElementById('sidebarToggleMobile');
+        const sidebarClose = document.getElementById('sidebarClose');
+        let isSidebarOpen = false;
+
+        function toggleSidebar() {
+            isSidebarOpen = !isSidebarOpen;
+
+            if (isSidebarOpen) {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
             }
+        }
+
+        function closeSidebar() {
+            if (isSidebarOpen) {
+                toggleSidebar();
+            }
+        }
+
+        sidebarToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleSidebar();
         });
 
-        // Close mobile menu on scroll
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            if (isMenuOpen) {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(closeMobileMenu, 100);
-            }
+        sidebarToggleMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeMobileMenu();
+            toggleSidebar();
         });
 
-        // Close mobile menu on escape key
+        sidebarClose.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Sidebar section expansion
+        document.querySelectorAll('.sidebar-section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const sectionId = header.getAttribute('data-section');
+                const sectionList = document.getElementById(sectionId);
+                const chevron = header.querySelector('.fa-chevron-down');
+
+                if (sectionList.classList.contains('expanded')) {
+                    sectionList.classList.remove('expanded');
+                    chevron.style.transform = '';
+                } else {
+                    sectionList.classList.add('expanded');
+                    chevron.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Close sidebar on link click
+        document.querySelectorAll('.sidebar-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                closeSidebar();
+            });
+        });
+
+        // Close menus on escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isMenuOpen) {
-                closeMobileMenu();
+            if (e.key === 'Escape') {
+                if (isSidebarOpen) {
+                    closeSidebar();
+                }
+                if (isMenuOpen) {
+                    closeMobileMenu();
+                }
             }
-        });
-
-        // Progress bar
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.body.offsetHeight;
-            const winHeight = window.innerHeight;
-            const scrollPercent = scrollTop / (docHeight - winHeight);
-            const progressBar = document.getElementById('progress-bar');
-            progressBar.style.width = scrollPercent * 100 + '%';
         });
 
         // Smooth scrolling
@@ -1812,50 +1200,15 @@ print(chr(69))  # E</code></pre>
             });
         });
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        // Close menus on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                if (isMenuOpen) {
+                    closeMobileMenu();
                 }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Header scroll effect
-        let lastScrollY = window.scrollY;
-        const header = document.querySelector('header');
-        let ticking = false;
-
-        function updateHeader() {
-            const currentScrollY = window.scrollY;
-
-            if (isMenuOpen && Math.abs(currentScrollY - lastScrollY) > 5) {
-                closeMobileMenu();
-            }
-
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
-            }
-
-            lastScrollY = currentScrollY;
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(updateHeader);
-                ticking = true;
+                if (isSidebarOpen && window.innerWidth > 1024) {
+                    closeSidebar();
+                }
             }
         });
 
@@ -1883,36 +1236,12 @@ print(chr(69))  # E</code></pre>
             });
         });
 
-        // Close mobile menu on window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && isMenuOpen) {
-                closeMobileMenu();
-            }
-        });
-
-        // Active section highlighting in TOC
-        const sections = document.querySelectorAll('section[id]');
-        const tocItems = document.querySelectorAll('.toc-item a');
-
-        function highlightTOC() {
-            let scrollPosition = window.scrollY + 100;
-
-            sections.forEach((section, index) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    tocItems.forEach(item => item.style.color = '');
-                    const activeItem = document.querySelector(`.toc-item a[href="#${section.id}"]`);
-                    if (activeItem) {
-                        activeItem.style.color = 'var(--primary-color)';
-                    }
-                }
+        // Initialize sidebar sections as collapsed
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.sidebar-list').forEach(list => {
+                list.classList.remove('expanded');
             });
-        }
-
-        window.addEventListener('scroll', highlightTOC);
-        highlightTOC(); // Initial call
+        });
     </script>
 </body>
 </html>
