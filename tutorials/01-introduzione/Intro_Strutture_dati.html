@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
     <!-- Header -->
     <header>
         <div class="header-container">
@@ -1071,6 +1074,88 @@ print(chr(69))  # E</code></pre>
     </main>
 
     <script>
+        // Progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = Math.min(scrollPercent * 100, 100) + '%';
+        }
+
+        window.addEventListener('scroll', updateProgressBar);
+        updateProgressBar(); // Initial call
+
+        // Progress bar and header hide functionality
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('header');
+        const floatingBurger = document.getElementById('floatingBurger');
+        const floatingBurgerBtn = document.getElementById('floatingBurgerBtn');
+        const progressBar = document.getElementById('progressBar');
+        let ticking = false;
+
+        function updateProgressAndHeader() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+
+            // Update progress bar - check if element exists
+            if (progressBar) {
+                progressBar.style.width = Math.min(scrollPercent * 100, 100) + '%';
+            }
+
+            // Handle header hide/show - check if elements exist
+            if (header && floatingBurger) {
+                const currentScrollY = window.scrollY;
+                const isScrollingDown = currentScrollY > lastScrollY;
+                const scrollThreshold = 80;
+                const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+
+                // Only trigger if scroll delta is significant enough
+                if (scrollDelta > 5) {
+                    if (isScrollingDown && currentScrollY > scrollThreshold) {
+                        // Scrolling down - hide header, show floating burger
+                        header.classList.add('hidden');
+                        floatingBurger.classList.add('visible');
+                    } else if (!isScrollingDown && currentScrollY > scrollThreshold) {
+                        // Scrolling up but not at top - show header, hide floating burger
+                        header.classList.remove('hidden');
+                        floatingBurger.classList.remove('visible');
+                    } else if (currentScrollY <= scrollThreshold) {
+                        // Near top - show header, hide floating burger
+                        header.classList.remove('hidden');
+                        floatingBurger.classList.remove('visible');
+                    }
+
+                    lastScrollY = currentScrollY;
+                }
+            }
+
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateProgressAndHeader);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+        updateProgressAndHeader(); // Initial call
+
+        // Floating burger functionality - check if element exists
+        if (floatingBurgerBtn) {
+            floatingBurgerBtn.addEventListener('click', () => {
+                // Toggle sidebar instead of scrolling to top
+                if (typeof toggleSidebar === 'function') {
+                    toggleSidebar();
+                }
+            });
+        }
+
         // Mobile menu functionality
         const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -1145,6 +1230,39 @@ print(chr(69))  # E</code></pre>
 
         sidebarClose.addEventListener('click', closeSidebar);
         sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Mobile menu section expansion
+        document.querySelectorAll('.mobile-section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const sectionId = header.getAttribute('data-mobile-section');
+                const sectionList = document.getElementById(sectionId);
+                const chevron = header.querySelector('.fa-chevron-down');
+
+                if (sectionList.classList.contains('expanded')) {
+                    sectionList.classList.remove('expanded');
+                    chevron.style.transform = '';
+                } else {
+                    // Close other sections first
+                    document.querySelectorAll('.mobile-section-list').forEach(list => {
+                        list.classList.remove('expanded');
+                    });
+                    document.querySelectorAll('.mobile-section-header .fa-chevron-down').forEach(icon => {
+                        icon.style.transform = '';
+                    });
+
+                    // Open clicked section
+                    sectionList.classList.add('expanded');
+                    chevron.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Close mobile menu on section link click
+        document.querySelectorAll('.mobile-section-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
 
         // Sidebar section expansion
         document.querySelectorAll('.sidebar-section-header').forEach(header => {
