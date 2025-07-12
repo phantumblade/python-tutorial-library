@@ -1053,36 +1053,49 @@
                 font-size: 0.8rem;
             }
 
-            .nav-popup {
-                min-width: 60px;
-                max-width: 70px;
-                right: 0.75rem;
+            .nav-sections {
+                right: 1rem;
                 top: 80px;
-                padding: 1rem 0.6rem;
+                gap: 0.6rem;
             }
             
             .nav-pill {
-                padding: 0.6rem;
-                font-size: 1rem;
-                border-radius: 50%;
-                width: 44px;
-                height: 44px;
+                width: 40px;
+                height: 40px;
+                font-size: 0.85rem;
+            }
+            
+            .nav-pill.current {
+                transform: scale(1.15);
+            }
+            
+            .nav-pill.distance-1 {
+                transform: scale(0.95);
+            }
+            
+            .nav-pill.distance-2 {
+                transform: scale(0.8);
+            }
+            
+            .nav-pill.distance-3 {
+                transform: scale(0.65);
             }
             
             .nav-pill .pill-text {
-                display: none;
+                display: none !important;
             }
             
             .nav-pill .pill-icon {
                 display: block;
+                font-size: 0.85rem;
             }
             
             .nav-toggle {
-                width: 28px;
-                height: 28px;
-                right: 0.4rem;
-                top: 90px;
-                font-size: 0.8rem;
+                width: 32px;
+                height: 32px;
+                right: 0.6rem;
+                top: 85px;
+                font-size: 0.85rem;
             }
 
             .highlight {
@@ -1110,121 +1123,135 @@
             }
         }
 
-        /* Redesigned Navigation Popup - Vertical Pills */
+        /* Floating Pills Navigation - No Container */
         .nav-popup {
             position: fixed;
-            top: 90px;
-            right: 1.5rem;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(15px) saturate(1.2);
-            border-radius: 20px;
-            padding: 1.2rem 1rem;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            top: 0;
+            right: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: 999;
-            min-width: 160px;
-            max-width: 200px;
-            opacity: 0;
-            transform: translateX(30px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .nav-popup.visible {
             opacity: 1;
-            transform: translateX(0) scale(1);
             pointer-events: auto;
         }
 
         .nav-popup.hidden {
-            transform: translateX(220px) scale(0.9);
-            opacity: 0.2;
+            opacity: 0;
         }
 
         .nav-sections {
+            position: absolute;
+            top: 100px;
+            right: 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
+            gap: 0.8rem;
+            pointer-events: none;
         }
 
         .nav-pill {
-            background: rgba(248, 250, 252, 0.8);
-            border: 1px solid rgba(226, 232, 240, 0.6);
-            border-radius: 12px;
-            padding: 0.7rem 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
             color: var(--text-color);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             cursor: pointer;
-            text-align: center;
-            line-height: 1.2;
             position: relative;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(12px) saturate(1.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            pointer-events: auto;
+            transform-origin: center;
         }
 
         .nav-pill.current {
             background: linear-gradient(135deg, var(--python-blue), var(--primary-color));
             color: white;
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(55, 118, 171, 0.4), 0 2px 8px rgba(55, 118, 171, 0.2);
+            transform: scale(1.2);
+            box-shadow: 0 8px 24px rgba(55, 118, 171, 0.4), 0 4px 12px rgba(55, 118, 171, 0.2);
             border-color: var(--python-blue);
             font-weight: 700;
+            z-index: 10;
         }
 
-        .nav-pill.near-before,
-        .nav-pill.near-after {
-            background: rgba(55, 118, 171, 0.12);
+        .nav-pill.distance-1 {
+            background: rgba(55, 118, 171, 0.15);
             color: var(--python-blue);
-            opacity: 0.85;
-            transform: scale(0.95);
-            border-color: rgba(55, 118, 171, 0.3);
+            transform: scale(1.0);
+            opacity: 0.9;
+            border-color: rgba(55, 118, 171, 0.4);
         }
 
-        .nav-pill.far-before,
-        .nav-pill.far-after {
-            background: rgba(55, 118, 171, 0.06);
+        .nav-pill.distance-2 {
+            background: rgba(55, 118, 171, 0.08);
+            color: var(--text-color);
+            transform: scale(0.85);
+            opacity: 0.7;
+            border-color: rgba(226, 232, 240, 0.5);
+        }
+
+        .nav-pill.distance-3 {
+            background: rgba(255, 255, 255, 0.6);
             color: var(--text-light);
-            opacity: 0.6;
-            transform: scale(0.9);
-            filter: blur(0.3px);
-            border-color: rgba(226, 232, 240, 0.4);
+            transform: scale(0.7);
+            opacity: 0.5;
+            filter: blur(0.5px);
+            border-color: rgba(226, 232, 240, 0.3);
         }
 
         .nav-pill:hover {
-            transform: scale(1.08);
-            background: rgba(55, 118, 171, 0.2);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-            border-color: rgba(55, 118, 171, 0.5);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(55, 118, 171, 0.6);
         }
 
         .nav-pill.current:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 24px rgba(55, 118, 171, 0.5);
+            transform: scale(1.25);
+            box-shadow: 0 12px 32px rgba(55, 118, 171, 0.5);
         }
 
-        /* Mobile specific styles */
+        .nav-pill.distance-1:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-pill.distance-2:hover {
+            transform: scale(0.9);
+        }
+
+        .nav-pill.distance-3:hover {
+            transform: scale(0.75);
+        }
+
+        /* Desktop: Show text with icons */
         .nav-pill .pill-text {
-            display: block;
+            display: none;
         }
 
         .nav-pill .pill-icon {
-            display: none;
+            display: block;
+            font-size: 1rem;
         }
 
         /* Hide/Show Arrow */
         .nav-toggle {
             position: fixed;
-            top: 100px;
-            right: 0.5rem;
-            width: 36px;
-            height: 36px;
-            background: rgba(55, 118, 171, 0.9);
+            top: 110px;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(55, 118, 171, 0.95);
             color: white;
             border: none;
             border-radius: 50%;
@@ -1232,13 +1259,13 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 1001;
             opacity: 0;
-            transform: translateX(20px) scale(0.8);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 0.9rem;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: translateX(30px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 1rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         .nav-toggle.visible {
@@ -1248,8 +1275,8 @@
 
         .nav-toggle:hover {
             background: var(--python-blue);
-            transform: translateX(-3px) scale(1.1);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            transform: translateX(-4px) scale(1.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
         }
 
         /* Complete horizontal scroll prevention */
@@ -1301,23 +1328,22 @@
         }
 
         @media (max-width: 992px) {
-            .nav-popup {
-                min-width: 140px;
-                max-width: 160px;
-                right: 1rem;
-                top: 85px;
+            .nav-sections {
+                right: 1.2rem;
+                top: 90px;
             }
             
             .nav-pill {
-                font-size: 0.75rem;
-                padding: 0.6rem 0.8rem;
+                width: 44px;
+                height: 44px;
+                font-size: 0.9rem;
             }
             
             .nav-toggle {
-                width: 32px;
-                height: 32px;
-                right: 0.4rem;
-                top: 95px;
+                width: 36px;
+                height: 36px;
+                right: 0.8rem;
+                top: 100px;
             }
         }
 
@@ -2840,9 +2866,22 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
     function createNavPills() {
         navSections.innerHTML = '';
         
-        // Determina il range di sezioni da mostrare (max 5: 2 prima + corrente + 2 dopo)
-        const startIndex = Math.max(0, currentSectionIndex - 2);
-        const endIndex = Math.min(sections.length - 1, currentSectionIndex + 2);
+        // Mostra sempre 5 pillole: 2 sopra + corrente + 2 sotto (quando possibile)
+        const maxVisible = 5;
+        const beforeCurrent = 2;
+        const afterCurrent = 2;
+        
+        let startIndex = Math.max(0, currentSectionIndex - beforeCurrent);
+        let endIndex = Math.min(sections.length - 1, currentSectionIndex + afterCurrent);
+        
+        // Aggiusta il range se siamo vicini ai bordi
+        if (endIndex - startIndex < maxVisible - 1) {
+            if (startIndex === 0) {
+                endIndex = Math.min(sections.length - 1, startIndex + maxVisible - 1);
+            } else if (endIndex === sections.length - 1) {
+                startIndex = Math.max(0, endIndex - maxVisible + 1);
+            }
+        }
         
         for (let i = startIndex; i <= endIndex; i++) {
             const section = sections[i];
@@ -2851,22 +2890,27 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
             pill.className = 'nav-pill';
             pill.title = section.title;
             
-            // Crea contenuto con testo e icona
-            pill.innerHTML = `
-                <span class="pill-text">${section.title}</span>
-                <i class="pill-icon ${section.icon}"></i>
-            `;
+            // Solo icona per default (mobile-first)
+            pill.innerHTML = `<i class="pill-icon ${section.icon}"></i>`;
             
-            // Assegna le classi in base alla posizione relativa
-            if (i === currentSectionIndex) {
+            // Calcola distanza dalla sezione corrente
+            const distance = Math.abs(i - currentSectionIndex);
+            
+            if (distance === 0) {
                 pill.classList.add('current');
-            } else if (i < currentSectionIndex) {
-                const distance = currentSectionIndex - i;
-                pill.classList.add(distance === 1 ? 'near-before' : 'far-before');
             } else {
-                const distance = i - currentSectionIndex;
-                pill.classList.add(distance === 1 ? 'near-after' : 'far-after');
+                pill.classList.add(`distance-${Math.min(distance, 3)}`);
             }
+            
+            // Posizionamento dinamico basato sulla posizione nell'array visibile
+            const positionIndex = i - startIndex;
+            const totalVisible = endIndex - startIndex + 1;
+            const centerPosition = Math.floor(totalVisible / 2);
+            const offsetFromCenter = positionIndex - centerPosition;
+            
+            // Applica offset verticale per creare effetto fluttuante
+            const verticalOffset = offsetFromCenter * 60; // 60px tra le pillole
+            pill.style.transform = `translateY(${verticalOffset}px)`;
             
             pill.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -2894,12 +2938,12 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
         navPopup.classList.add('visible');
         navToggle.classList.remove('visible');
         
-        // Auto-hide dopo 4 secondi
+        // Auto-hide dopo 5 secondi (più tempo per interagire)
         autoHideTimeout = setTimeout(() => {
-            if (!navPopup.matches(':hover')) {
+            if (!navPopup.matches(':hover') && !document.querySelector('.nav-pill:hover')) {
                 hideNavPopup();
             }
-        }, 4000);
+        }, 5000);
     }
     
     function hideNavPopup() {
@@ -2910,10 +2954,10 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
         clearTimeout(autoHideTimeout);
         isPopupHidden = true;
         
-        // Reset dopo un po'
+        // Reset dopo 3 secondi
         setTimeout(() => {
             isPopupHidden = false;
-        }, 2000);
+        }, 3000);
     }
     
     function forceShowNavPopup() {
@@ -2945,9 +2989,14 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
         }
     }
     
-    // Event listeners
-    window.addEventListener('scroll', updateCurrentSection);
+    // Enhanced event listeners
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateCurrentSection, 100); // Debounce per performance
+    });
     
+    // Hover management per desktop
     navPopup.addEventListener('mouseenter', () => {
         clearTimeout(autoHideTimeout);
     });
@@ -2955,13 +3004,20 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
     navPopup.addEventListener('mouseleave', () => {
         autoHideTimeout = setTimeout(() => {
             hideNavPopup();
-        }, 1000);
+        }, 1500);
     });
     
+    // Toggle button events
     navToggle.addEventListener('click', forceShowNavPopup);
+    navToggle.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        forceShowNavPopup();
+    });
     
-    // Touch events for mobile
-    navToggle.addEventListener('touchstart', forceShowNavPopup);
+    // Prevent accidental hiding on mobile touch
+    navPopup.addEventListener('touchstart', (e) => {
+        clearTimeout(autoHideTimeout);
+    });
 
     // Inizializzazione
     document.addEventListener('DOMContentLoaded', function() {
