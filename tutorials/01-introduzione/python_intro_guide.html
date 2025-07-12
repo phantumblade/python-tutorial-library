@@ -1054,31 +1054,42 @@
             }
 
             .nav-sections {
-                right: 1rem;
-                top: 80px;
-                gap: 0.6rem;
+                right: 0.8rem;
+                top: 85px;
+                gap: 0.4rem;
             }
             
             .nav-pill {
-                width: 40px;
-                height: 40px;
-                font-size: 0.85rem;
+                width: 32px;
+                height: 32px;
+                min-width: 32px;
+                padding: 0;
+                border-radius: 50%;
+                font-size: 0.75rem;
             }
             
             .nav-pill.current {
-                transform: scale(1.15);
+                transform: scale(1.1);
+                width: 36px;
+                height: 36px;
             }
             
             .nav-pill.distance-1 {
-                transform: scale(0.95);
+                transform: scale(0.9);
+                width: 30px;
+                height: 30px;
             }
             
             .nav-pill.distance-2 {
                 transform: scale(0.8);
+                width: 28px;
+                height: 28px;
             }
             
             .nav-pill.distance-3 {
-                transform: scale(0.65);
+                transform: scale(0.7);
+                width: 26px;
+                height: 26px;
             }
             
             .nav-pill .pill-text {
@@ -1087,15 +1098,15 @@
             
             .nav-pill .pill-icon {
                 display: block;
-                font-size: 0.85rem;
+                font-size: 0.75rem;
             }
             
             .nav-toggle {
-                width: 32px;
-                height: 32px;
-                right: 0.6rem;
-                top: 85px;
-                font-size: 0.85rem;
+                width: 28px;
+                height: 28px;
+                right: 0.5rem;
+                top: 90px;
+                font-size: 0.8rem;
             }
 
             .highlight {
@@ -1158,13 +1169,13 @@
         .nav-pill {
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
+            border-radius: 16px;
+            padding: 0.6rem 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            gap: 0.5rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-decoration: none;
             color: var(--text-color);
@@ -1175,12 +1186,14 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
             pointer-events: auto;
             transform-origin: center;
+            min-width: 120px;
+            white-space: nowrap;
         }
 
         .nav-pill.current {
             background: linear-gradient(135deg, var(--python-blue), var(--primary-color));
             color: white;
-            transform: scale(1.2);
+            transform: scale(1.1);
             box-shadow: 0 8px 24px rgba(55, 118, 171, 0.4), 0 4px 12px rgba(55, 118, 171, 0.2);
             border-color: var(--python-blue);
             font-weight: 700;
@@ -1190,7 +1203,7 @@
         .nav-pill.distance-1 {
             background: rgba(55, 118, 171, 0.15);
             color: var(--python-blue);
-            transform: scale(1.0);
+            transform: scale(0.95);
             opacity: 0.9;
             border-color: rgba(55, 118, 171, 0.4);
         }
@@ -1198,17 +1211,17 @@
         .nav-pill.distance-2 {
             background: rgba(55, 118, 171, 0.08);
             color: var(--text-color);
-            transform: scale(0.85);
-            opacity: 0.7;
+            transform: scale(0.9);
+            opacity: 0.75;
             border-color: rgba(226, 232, 240, 0.5);
         }
 
         .nav-pill.distance-3 {
             background: rgba(255, 255, 255, 0.6);
             color: var(--text-light);
-            transform: scale(0.7);
-            opacity: 0.5;
-            filter: blur(0.5px);
+            transform: scale(0.85);
+            opacity: 0.6;
+            filter: blur(0.3px);
             border-color: rgba(226, 232, 240, 0.3);
         }
 
@@ -1218,30 +1231,31 @@
         }
 
         .nav-pill.current:hover {
-            transform: scale(1.25);
+            transform: scale(1.15);
             box-shadow: 0 12px 32px rgba(55, 118, 171, 0.5);
         }
 
         .nav-pill.distance-1:hover {
-            transform: scale(1.05);
+            transform: scale(1.0);
         }
 
         .nav-pill.distance-2:hover {
-            transform: scale(0.9);
+            transform: scale(0.95);
         }
 
         .nav-pill.distance-3:hover {
-            transform: scale(0.75);
+            transform: scale(0.9);
         }
 
         /* Desktop: Show text with icons */
         .nav-pill .pill-text {
-            display: none;
+            display: block;
+            font-size: 0.8rem;
         }
 
         .nav-pill .pill-icon {
             display: block;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         /* Hide/Show Arrow */
@@ -1331,12 +1345,21 @@
             .nav-sections {
                 right: 1.2rem;
                 top: 90px;
+                gap: 0.7rem;
             }
             
             .nav-pill {
-                width: 44px;
-                height: 44px;
-                font-size: 0.9rem;
+                min-width: 100px;
+                padding: 0.5rem 0.8rem;
+                font-size: 0.75rem;
+            }
+            
+            .nav-pill .pill-text {
+                font-size: 0.75rem;
+            }
+            
+            .nav-pill .pill-icon {
+                font-size: 0.8rem;
             }
             
             .nav-toggle {
@@ -2890,8 +2913,11 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
             pill.className = 'nav-pill';
             pill.title = section.title;
             
-            // Solo icona per default (mobile-first)
-            pill.innerHTML = `<i class="pill-icon ${section.icon}"></i>`;
+            // Desktop: Icona + Testo, Mobile: Solo icona (gestito da CSS)
+            pill.innerHTML = `
+                <i class="pill-icon ${section.icon}"></i>
+                <span class="pill-text">${section.title}</span>
+            `;
             
             // Calcola distanza dalla sezione corrente
             const distance = Math.abs(i - currentSectionIndex);
@@ -2908,8 +2934,10 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
             const centerPosition = Math.floor(totalVisible / 2);
             const offsetFromCenter = positionIndex - centerPosition;
             
-            // Applica offset verticale per creare effetto fluttuante
-            const verticalOffset = offsetFromCenter * 60; // 60px tra le pillole
+            // Applica offset verticale responsive
+            const isMobile = window.innerWidth <= 768;
+            const spacing = isMobile ? 36 : 50; // Più strette su mobile
+            const verticalOffset = offsetFromCenter * spacing;
             pill.style.transform = `translateY(${verticalOffset}px)`;
             
             pill.addEventListener('click', (e) => {
