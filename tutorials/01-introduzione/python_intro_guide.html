@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduzione a Python</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Introduzione a Python - Python Tutorial Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,128 +13,489 @@
         }
 
         :root {
-            --primary-blue: #3776ab;
-            --primary-yellow: #ffd43b;
-            --dark-bg: #2c3e50;
-            --light-bg: #f8f9fa;
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --purple-color: #9b59b6;
+            --dark-blue: #34495e;
+            --python-blue: #3776ab;
+            --python-yellow: #ffd343;
+            --light-bg: #ecf0f1;
             --white: #ffffff;
-            --text-dark: #2c3e50;
-            --text-light: #6c757d;
-            --success: #28a745;
-            --danger: #dc3545;
-            --warning: #ffc107;
-            --border: #e9ecef;
+            --text-color: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-color: #e0e6ed;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--light-bg);
-            color: var(--text-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-bg);
             overflow-x: hidden;
         }
 
-        .container {
-            width: 100vw;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header {
-            background: var(--primary-blue);
-            color: var(--white);
-            text-align: center;
-            padding: 3rem 1rem;
-            position: relative;
-        }
-
-        .python-logo {
-            font-size: 4rem;
-            color: var(--primary-yellow);
-            margin-bottom: 1rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .nav {
-            background: var(--dark-bg);
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
         }
 
-        .nav-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            max-width: 1200px;
+        .header-container {
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .nav-link {
-            color: var(--white);
-            text-decoration: none;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
+        .navbar {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-color);
+            z-index: 1001;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--python-blue);
+            font-size: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .nav-links a i {
+            font-size: 0.85rem;
+        }
+
+        /* Dropdown Menu Desktop */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-toggle .fa-chevron-down {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            margin: 0.25rem;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            background: var(--primary-blue);
-            border-bottom-color: var(--primary-yellow);
+        .dropdown-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(4px);
         }
 
-        .content {
-            flex: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        .dropdown-item i {
+            font-size: 0.8rem;
+            width: 16px;
+        }
+
+        /* Mobile Sidebar */
+        .mobile-sidebar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-sidebar-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-sidebar.active {
+            pointer-events: all;
+            opacity: 1;
+        }
+
+        .sidebar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .sidebar-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 320px;
+            max-width: 85vw;
+            height: 100%;
+            background: var(--white);
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-sidebar.active .sidebar-content {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--python-blue);
+            color: white;
+        }
+
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-link:hover {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+        }
+
+        .sidebar-section {
+            margin: 0.5rem 0;
+        }
+
+        .sidebar-section-toggle {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-section-toggle:hover {
+            background: rgba(52, 152, 219, 0.05);
+            color: var(--primary-color);
+        }
+
+        .sidebar-section-toggle span {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .toggle-icon {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-section.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .sidebar-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--light-bg);
+        }
+
+        .sidebar-section.active .sidebar-submenu {
+            max-height: 400px;
+        }
+
+        .sidebar-sublink {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 2.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-sublink:hover {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+        }
+
+        .sidebar-sublink i {
+            font-size: 0.8rem;
+            width: 16px;
+        }
+
+        .sidebar-sublink.active {
+            background: rgba(52, 152, 219, 0.15);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--python-blue);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            line-height: 1.5;
+        }
+
+        /* Optimized Main Content */
+        /* Main Content - Ottimizzato per utilizzare tutto lo spazio */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .section {
             margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
         }
 
         .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .section-title i {
+            color: var(--python-blue);
+            font-size: 1.6rem;
+            padding: 0.5rem;
+            background: rgba(55, 118, 171, 0.1);
+            border-radius: 10px;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--python-blue), var(--primary-color));
+            border-radius: 2px;
+        }
+
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .content-section-title {
             display: flex;
             align-items: center;
             gap: 1rem;
             font-size: 2rem;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-color);
             margin-bottom: 2rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary-blue);
+            border-bottom: 2px solid var(--python-blue);
         }
 
-        .section-icon {
+        .content-section-icon {
             width: 3rem;
             height: 3rem;
-            background: var(--primary-blue);
+            background: var(--python-blue);
             color: var(--white);
             border-radius: 0.5rem;
             display: flex;
@@ -143,32 +504,96 @@
             font-size: 1.5rem;
         }
 
+        /* Optimized Grid Layout */
+        /* Optimized Grid Layout */
         .grid {
             display: grid;
-            gap: 3.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            align-items: start;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .grid-compact {
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            width: 100%;
+            max-width: 100%;
         }
 
         .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 100%;
+            align-items: start;
         }
 
         .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 100%;
+            align-items: start;
         }
 
+        /* Esercizi: forza 2x2 invece di 3+1 */
+        .grid-exercises {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 100%;
+            align-items: start;
+        }
+
+        /* Blocchi codice complessi occupano più spazio */
+        .card.wide-code {
+            grid-column: span 2;
+        }
+
+        .card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Clean Card Styles */
         .card {
             background: var(--white);
-            border-radius: 0.75rem;
+            border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            display: block;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--python-blue);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
         }
 
         .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-color: var(--python-blue);
         }
 
         .card-header {
@@ -179,40 +604,47 @@
         }
 
         .card-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--primary-blue);
-            color: var(--white);
-            border-radius: 0.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            color: white;
+            flex-shrink: 0;
+            background: var(--python-blue);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .card h3 {
+        .card-title {
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--secondary-color);
+            margin: 0;
+            line-height: 1.3;
         }
 
-        .card p {
+        .card-description {
             color: var(--text-light);
-            margin-bottom: 1rem;
-            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
         .code-block {
             background: #1e1e1e;
             color: #e1e1e1;
-            padding: 1rem;
-            border-radius: 0.5rem;
+            padding: 0.875rem;
+            border-radius: 8px;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-            font-size: 0.85rem;
-            overflow-x: auto;
-            border-left: 3px solid var(--primary-blue);
-            white-space: pre;
-            line-height: 1.5;
+            font-size: 0.8rem;
+            border-left: 3px solid var(--python-blue);
+            line-height: 1.4;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            margin: 0.75rem 0;
         }
 
         .keyword { color: #569cd6; }
@@ -221,31 +653,48 @@
         .comment { color: #6a9955; }
         .function { color: #dcdcaa; }
 
+        /* Clean Highlight Blocks */
         .highlight {
-            background: #fff9c4;
+            background: #fff9e6;
             padding: 1rem;
-            border-radius: 0.5rem;
-            border-left: 4px solid var(--warning);
+            border-radius: 8px;
+            border-left: 4px solid var(--warning-color);
             margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .highlight-icon {
-            color: var(--warning);
+            color: var(--warning-color);
             margin-right: 0.5rem;
+            font-size: 1rem;
         }
 
+        /* Clean Interactive Demo */
         .interactive-demo {
             background: var(--light-bg);
-            border-radius: 0.75rem;
+            border-radius: 12px;
             padding: 1.5rem;
-            margin: 1rem 0;
-            border: 1px solid var(--border);
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .interactive-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--python-blue);
+            border-radius: 12px 12px 0 0;
         }
 
         .demo-title {
             font-weight: 600;
             margin-bottom: 1rem;
-            color: var(--text-dark);
+            color: var(--text-color);
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -255,20 +704,21 @@
             width: 100%;
             min-width: 0;
             max-width: 100%;
-            min-height: 120px;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 0.5rem;
+            min-height: 100px;
+            padding: 0.875rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             background: #1e1e1e;
             color: #e1e1e1;
             resize: vertical;
             margin-bottom: 1rem;
             box-sizing: border-box;
-            line-height: 1.5;
-            overflow-x: auto;
-            white-space: pre;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
             tab-size: 4;
         }
 
@@ -279,55 +729,78 @@
             margin-bottom: 1rem;
         }
 
+        /* Clean Button Styles */
         .btn {
-            background: var(--success);
+            background: var(--python-blue);
             color: var(--white);
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            text-decoration: none;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .btn:hover {
-            background: #218838;
+            background: var(--primary-color);
             transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .btn:disabled {
             background: var(--text-light);
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--python-blue);
+            border: 2px solid var(--python-blue);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-secondary:hover {
+            background: var(--python-blue);
+            color: var(--white);
         }
 
         .output {
             background: var(--white);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: 0.5rem;
             padding: 1rem;
             font-family: 'SF Mono', Monaco, monospace;
             font-size: 0.85rem;
             white-space: pre-wrap;
-            color: var(--text-dark);
+            color: var(--text-color);
             min-height: 50px;
             max-height: 200px;
             overflow-y: auto;
         }
 
         .output.success {
-            border-color: var(--success);
+            border-color: var(--success-color);
             background: #f8fff8;
         }
 
         .output.error {
-            border-color: var(--danger);
+            border-color: var(--accent-color);
             background: #fff8f8;
-            color: var(--danger);
+            color: var(--accent-color);
         }
 
         .operator-grid {
@@ -412,145 +885,624 @@
             line-height: 1.5;
         }
 
+        /* Footer */
         .footer {
-            background: var(--dark-bg);
-            color: var(--white);
+            background: var(--secondary-color);
+            color: white;
+            padding: 1.5rem 0;
             text-align: center;
-            padding: 2rem;
+            margin-top: 3rem;
         }
 
-        .footer-icon {
-            font-size: 3rem;
-            color: var(--primary-yellow);
-            margin-bottom: 1rem;
+        .footer p {
+            opacity: 0.8;
+            margin: 0;
+            font-size: 0.9rem;
+            padding: 0 1rem;
         }
 
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Optimized Responsive Design */
         @media (max-width: 768px) {
-            .header {
-                padding: 2rem 1rem;
+            .nav-links {
+                display: none;
             }
 
-            .header h1 {
-                font-size: 2rem;
+            .mobile-sidebar-toggle {
+                display: block;
             }
 
-            .python-logo {
-                font-size: 3rem;
+            .logo h1 {
+                font-size: 1.1rem;
             }
 
-            .nav-container {
-                grid-template-columns: repeat(2, 1fr);
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 1.6rem;
             }
 
-            .nav-link {
-                padding: 0.75rem 0.5rem;
-                font-size: 0.8rem;
+            .navbar {
+                padding: 0.75rem 0;
             }
 
-            .content {
-                padding: 1rem;
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .hero h2 {
+                font-size: 1.6rem;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .main-content {
+                padding: 1.5rem 1rem;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+
+            .section {
+                margin-bottom: 2.5rem;
+            }
+
+            .section-header {
+                margin-bottom: 1.5rem;
             }
 
             .section-title {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
+                flex-direction: column;
+                gap: 0.5rem;
             }
 
-            .grid-2,
-            .grid-3 {
+            .section-title i {
+                font-size: 1.3rem;
+                padding: 0.4rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .grid, .grid-2, .grid-3, .grid-compact {
                 grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+            
+            .grid-exercises {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .grid-exercises .card {
+                min-width: 100%;
+                width: 100%;
+            }
+
+            .card.wide-code, .card.full-width {
+                grid-column: 1;
+                min-width: 100%;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+
+            .card-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .card-description {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .header-container {
+                padding: 0 1rem;
+                max-width: 100vw;
+                overflow-x: hidden;
             }
 
             .operator-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .interactive-demo {
+                padding: 1.25rem;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .code-input {
+                max-width: 100%;
+                overflow-x: auto;
+                font-size: 0.8rem;
+            }
+
+            .nav-popup {
+                width: 45px;
+                right: 0.5rem;
+            }
+            
+            .nav-pill {
+                width: 32px;
+                height: 32px;
+                font-size: 0.6rem;
+            }
+            
+            .nav-toggle {
+                width: 24px;
+                height: 24px;
+                right: 0.25rem;
+                font-size: 0.7rem;
+            }
+
+            .highlight {
+                padding: 0.875rem;
+            }
+
+            .sidebar-content {
+                width: 280px;
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .code-input {
+                min-height: 80px;
+                padding: 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .code-block {
+                padding: 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Redesigned Navigation Popup - Vertical Pills */
+        .nav-popup {
+            position: fixed;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 1rem 0.75rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 999;
+            width: 60px;
+            opacity: 0;
+            transform: translateY(-50%) translateX(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .nav-popup.visible {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+            pointer-events: auto;
+        }
+
+        .nav-popup.hidden {
+            transform: translateY(-50%) translateX(60px);
+            opacity: 0.3;
+        }
+
+        .nav-sections {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-pill {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 2px solid transparent;
+            text-align: center;
+            line-height: 1;
+            word-break: break-word;
+            position: relative;
+        }
+
+        .nav-pill.current {
+            background: var(--python-blue);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(55, 118, 171, 0.3);
+            border-color: var(--python-blue);
+        }
+
+        .nav-pill.near-before,
+        .nav-pill.near-after {
+            background: rgba(55, 118, 171, 0.15);
+            color: var(--python-blue);
+            opacity: 0.8;
+            transform: scale(0.9);
+        }
+
+        .nav-pill.far-before,
+        .nav-pill.far-after {
+            background: rgba(55, 118, 171, 0.08);
+            color: var(--text-light);
+            opacity: 0.5;
+            transform: scale(0.75);
+            filter: blur(0.5px);
+        }
+
+        .nav-pill:hover {
+            transform: scale(1.05);
+            background: rgba(55, 118, 171, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-pill.current:hover {
+            transform: scale(1.15);
+        }
+
+        /* Hide/Show Arrow */
+        .nav-toggle {
+            position: fixed;
+            top: 50%;
+            right: 0.5rem;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: rgba(55, 118, 171, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-50%) translateX(20px);
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .nav-toggle.visible {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        .nav-toggle:hover {
+            background: var(--python-blue);
+            transform: translateY(-50%) translateX(-2px) scale(1.1);
+        }
+
+        /* Complete horizontal scroll prevention */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+            width: 100%;
+        }
+
+        * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .code-input, .interactive-demo, .card, .main-content, .header-container {
+            overflow-x: hidden;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
+        /* Prevent any element from causing horizontal overflow */
+        .code-block, .output, pre, code {
+            overflow-x: auto;
+            max-width: 100%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        /* Ensure grid containers don't overflow */
+        .grid, .grid-2, .grid-3, .grid-compact, .grid-exercises {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-exercises {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .card.wide-code {
+                grid-column: span 1;
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-popup {
+                width: 50px;
+                right: 0.75rem;
+            }
+            
+            .nav-pill {
+                width: 36px;
+                height: 36px;
+                font-size: 0.65rem;
+            }
+            
+            .nav-toggle {
+                width: 28px;
+                height: 28px;
+                right: 0.25rem;
             }
         }
 
         @media (max-width: 480px) {
-            .nav-container {
-                grid-template-columns: 1fr;
+            .hero {
+                padding: 1.5rem 0;
             }
 
-            .nav-link {
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .main-content {
+                padding: 1.25rem 0.75rem;
+            }
+
+            .section {
+                margin-bottom: 2rem;
+            }
+
+            .section-header {
+                margin-bottom: 1.25rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .section-title i {
+                font-size: 1.2rem;
+                padding: 0.3rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .card {
                 padding: 1rem;
-                flex-direction: row;
-                justify-content: center;
+                border-radius: 10px;
+            }
+
+            .card-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+                border-radius: 8px;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .card-description {
+                font-size: 0.85rem;
+                margin-bottom: 0.875rem;
+            }
+
+            .grid, .grid-2, .grid-3, .grid-compact {
+                gap: 1rem;
+            }
+
+            .interactive-demo {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+
+            .highlight {
+                padding: 0.75rem;
+                border-radius: 6px;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                border-radius: 6px;
+            }
+
+            .sidebar-content {
+                width: 260px;
+            }
+
+            .header-container {
+                padding: 0 0.75rem;
+            }
+
+            .code-input {
+                min-height: 70px;
+                padding: 0.625rem;
+                font-size: 0.75rem;
+            }
+
+            .code-block {
+                padding: 0.625rem;
+                font-size: 0.7rem;
             }
         }
 
-        /* Migliora la larghezza delle card nelle griglie */
-.grid-2 .card, .grid-3 .card {
-    min-width: 350px;
-}
-@media (max-width: 900px) {
-    .grid-2 .card, .grid-3 .card {
-        min-width: 0;
-    }
-}
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="python-logo">
-                <i class="fab fa-python"></i>
-            </div>
-            <h1>Introduzione a Python</h1>
-            <p>Guida completa ai concetti fondamentali del linguaggio</p>
-        </header>
-
-        <nav class="nav">
-            <div class="nav-container">
-                <a href="#repl" class="nav-link">
-                    <i class="fas fa-terminal"></i>
-                    <span>REPL</span>
-                </a>
-                <a href="#sintassi" class="nav-link">
-                    <i class="fas fa-code"></i>
-                    <span>Sintassi</span>
-                </a>
-                <a href="#tipi" class="nav-link">
-                    <i class="fas fa-tags"></i>
-                    <span>Tipi</span>
-                </a>
-                <a href="#operatori" class="nav-link">
-                    <i class="fas fa-calculator"></i>
-                    <span>Operatori</span>
-                </a>
-                <a href="#costrutti" class="nav-link">
-                    <i class="fas fa-cogs"></i>
-                    <span>Costrutti</span>
-                </a>
-                <a href="#motivazioni" class="nav-link">
-                    <i class="fas fa-star"></i>
-                    <span>Motivazioni</span>
-                </a>
-                <a href="#vantaggi" class="nav-link">
-                    <i class="fas fa-balance-scale"></i>
-                    <span>Pro/Contro</span>
-                </a>
-                <a href="#esempi" class="nav-link">
-                    <i class="fas fa-lightbulb"></i>
-                    <span>Esempi</span>
-                </a>
-                <a href="#esercizi" class="nav-link">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Esercizi</span>
-                </a>
-                <a href="#concetti" class="nav-link">
-                    <i class="fas fa-rocket"></i>
-                    <span>Avanzati</span>
-                </a>
-            </div>
-        </nav>
-
-        <main class="content">
-            <section id="repl" class="section">
-                <div class="section-title">
-                    <div class="section-icon">
-                        <i class="fas fa-terminal"></i>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <nav class="navbar">
+                <a href="../../index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fab fa-python"></i>
                     </div>
-                    <h2>REPL: Read, Evaluate, Print, Loop</h2>
+                    <h1>Python Tutorial</h1>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
+                    
+                    <li class="dropdown">
+                        <a href="#fondamenti" class="dropdown-toggle"><i class="fas fa-book-open"></i> Fondamenti <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="#repl" class="dropdown-item"><i class="fas fa-terminal"></i> REPL</a>
+                            <a href="#sintassi" class="dropdown-item"><i class="fas fa-code"></i> Sintassi</a>
+                            <a href="#tipi" class="dropdown-item"><i class="fas fa-tags"></i> Tipi di Dati</a>
+                            <a href="#operatori" class="dropdown-item"><i class="fas fa-calculator"></i> Operatori</a>
+                            <a href="#costrutti" class="dropdown-item"><i class="fas fa-cogs"></i> Costrutti</a>
+                        </div>
+                    </li>
+                    
+                    <li><a href="#motivazioni"><i class="fas fa-star"></i> Perché Python</a></li>
+                    
+                    <li class="dropdown">
+                        <a href="#pratica" class="dropdown-toggle"><i class="fas fa-code"></i> Pratica <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="#esempi" class="dropdown-item"><i class="fas fa-lightbulb"></i> Esempi</a>
+                            <a href="#esercizi" class="dropdown-item"><i class="fas fa-graduation-cap"></i> Esercizi</a>
+                            <a href="#concetti" class="dropdown-item"><i class="fas fa-rocket"></i> Avanzati</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Mobile Sidebar Toggle -->
+                <button class="mobile-sidebar-toggle" aria-label="Menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-overlay"></div>
+        <nav class="sidebar-content">
+            <div class="sidebar-header">
+                <h3>Navigazione</h3>
+                <button class="sidebar-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-menu">
+                <a href="../../index.html" class="sidebar-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                
+                <div class="sidebar-section">
+                    <button class="sidebar-section-toggle">
+                        <span><i class="fas fa-book-open"></i> Fondamenti</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="sidebar-submenu">
+                        <a href="#repl" class="sidebar-sublink"><i class="fas fa-terminal"></i> REPL</a>
+                        <a href="#sintassi" class="sidebar-sublink"><i class="fas fa-code"></i> Sintassi</a>
+                        <a href="#tipi" class="sidebar-sublink"><i class="fas fa-tags"></i> Tipi di Dati</a>
+                        <a href="#operatori" class="sidebar-sublink"><i class="fas fa-calculator"></i> Operatori</a>
+                        <a href="#costrutti" class="sidebar-sublink"><i class="fas fa-cogs"></i> Costrutti</a>
+                    </div>
                 </div>
+                
+                <a href="#motivazioni" class="sidebar-link">
+                    <i class="fas fa-star"></i> Perché Python
+                </a>
+                
+                <div class="sidebar-section">
+                    <button class="sidebar-section-toggle">
+                        <span><i class="fas fa-code"></i> Pratica</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="sidebar-submenu">
+                        <a href="#esempi" class="sidebar-sublink"><i class="fas fa-lightbulb"></i> Esempi</a>
+                        <a href="#esercizi" class="sidebar-sublink"><i class="fas fa-graduation-cap"></i> Esercizi</a>
+                        <a href="#concetti" class="sidebar-sublink"><i class="fas fa-rocket"></i> Avanzati</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Introduzione a Python</h2>
+            <p>Guida completa ai concetti fondamentali del linguaggio di programmazione più versatile</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section id="repl" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-terminal"></i>
+                    REPL: Read, Evaluate, Print, Loop
+                </h2>
+                <p class="section-subtitle">Esegui codice Python immediatamente senza compilazione</p>
+            </div>
 
                 <p>Python è un linguaggio <strong>interpretato</strong> che utilizza un REPL. Quando inserisci un'espressione, viene immediatamente interpretata e il risultato mostrato.</p>
 
@@ -575,37 +1527,38 @@
                     <div class="output"></div>
                 </div>
 
-                <div class="grid grid-2">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <h3>Hello World</h3>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-play"></i>
                         </div>
-                        <p>Il programma più semplice in Python:</p>
-                        <div class="code-block"><span class="function">print</span>(<span class="string">"Hello World"</span>)</div>
+                        <h3 class="card-title">Hello World</h3>
                     </div>
+                    <p class="card-description">Il programma più semplice in Python:</p>
+                    <div class="code-block"><span class="function">print</span>(<span class="string">"Hello World"</span>)</div>
                 </div>
+            </div>
             </section>
 
-            <section id="sintassi" class="section">
-                <div class="section-title">
-                    <div class="section-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h2>Sintassi di Base</h2>
-                </div>
+        <section id="sintassi" class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    Sintassi di Base
+                </h2>
+                <p class="section-subtitle">Le regole fondamentali per scrivere codice Python</p>
+            </div>
 
-                <div class="grid grid-2">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-indent"></i>
-                            </div>
-                            <h3>Indentazione</h3>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-indent"></i>
                         </div>
-                        <p>Raggruppa le istruzioni con l'indentazione (4 spazi):</p>
+                        <h3 class="card-title">Indentazione</h3>
+                    </div>
+                    <p class="card-description">Raggruppa le istruzioni con l'indentazione (4 spazi):</p>
                         <div class="code-block"><span class="keyword">if</span> <span class="keyword">True</span>:
     <span class="function">print</span>(<span class="string">"Blocco indentato"</span>)
 <span class="function">print</span>(<span class="string">"Fuori dal blocco"</span>)</div>
@@ -1045,14 +1998,14 @@ print(f"2 elevato alla 10: {math.pow(2, 10)}")</textarea>
                 <div class="grid grid-2">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-icon" style="background-color: var(--success);">
+                            <div class="card-icon" style="background-color: var(--success-color);">
                                 <i class="fas fa-thumbs-up"></i>
                             </div>
                             <h3>Vantaggi</h3>
                         </div>
                         <div class="type-list">
                             <div class="type-item">
-                                <div class="type-icon" style="background-color: var(--success);">
+                                <div class="type-icon" style="background-color: var(--success-color);">
                                     <i class="fas fa-zap"></i>
                                 </div>
                                 <div class="type-content">
@@ -1062,7 +2015,7 @@ print(f"2 elevato alla 10: {math.pow(2, 10)}")</textarea>
                             </div>
 
                             <div class="type-item">
-                                <div class="type-icon" style="background-color: var(--success);">
+                                <div class="type-icon" style="background-color: var(--success-color);">
                                     <i class="fas fa-globe"></i>
                                 </div>
                                 <div class="type-content">
@@ -1072,7 +2025,7 @@ print(f"2 elevato alla 10: {math.pow(2, 10)}")</textarea>
                             </div>
 
                             <div class="type-item">
-                                <div class="type-icon" style="background-color: var(--success);">
+                                <div class="type-icon" style="background-color: var(--success-color);">
                                     <i class="fas fa-bug"></i>
                                 </div>
                                 <div class="type-content">
@@ -1085,14 +2038,14 @@ print(f"2 elevato alla 10: {math.pow(2, 10)}")</textarea>
 
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-icon" style="background-color: var(--danger);">
+                            <div class="card-icon" style="background-color: var(--accent-color);">
                                 <i class="fas fa-thumbs-down"></i>
                             </div>
                             <h3>Svantaggi</h3>
                         </div>
                         <div class="type-list">
                             <div class="type-item">
-                                <div class="type-icon" style="background-color: var(--danger);">
+                                <div class="type-icon" style="background-color: var(--accent-color);">
                                     <i class="fas fa-clock"></i>
                                 </div>
                                 <div class="type-content">
@@ -1102,7 +2055,7 @@ print(f"2 elevato alla 10: {math.pow(2, 10)}")</textarea>
                             </div>
 
                             <div class="type-item">
-                                <div class="type-icon" style="background-color: var(--danger);">
+                                <div class="type-icon" style="background-color: var(--accent-color);">
                                     <i class="fas fa-cog"></i>
                                 </div>
                                 <div class="type-content">
@@ -1225,30 +2178,19 @@ print(f"Ciao {nome}, hai {età} anni!")</textarea>
                         </div>
                         <p>Operazioni matematiche avanzate:</p>
                         <div class="interactive-demo">
-                            <textarea class="code-input" style="min-height: 120px;"># Operazioni di base
-print(f"Radice quadrata di 16: {16**0.5}")
-print(f"Pi greco approssimato: {22/7:.4f}")
-print(f"2 elevato alla 10: {2**10}")
+                            <textarea class="code-input"># Operazioni matematiche
+print(f"Radice di 16: {16**0.5}")
+print(f"2 alla 10: {2**10}")
 
-# Controllo numero primo
+# Numero primo semplice
 def è_primo(n):
-    if n < 2:
-        return False
+    if n < 2: return False
     for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return False
+        if n % i == 0: return False
     return True
 
-print(f"7 è primo? {è_primo(7)}")
-print(f"8 è primo? {è_primo(8)}")
-
-# Fattoriale
-def fattoriale(n):
-    if n <= 1:
-        return 1
-    return n * fattoriale(n-1)
-
-print(f"5! = {fattoriale(5)}")</textarea>
+print(f"7 è primo: {è_primo(7)}")
+print(f"8 è primo: {è_primo(8)}")</textarea>
                             <button class="btn" onclick="runCode(this)">
                                 <i class="fas fa-play"></i> Esegui
                             </button>
@@ -1266,7 +2208,7 @@ print(f"5! = {fattoriale(5)}")</textarea>
                     <h2>Esercizi Pratici</h2>
                 </div>
 
-                <div class="grid grid-2">
+                <div class="grid-exercises">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">
@@ -1276,16 +2218,12 @@ print(f"5! = {fattoriale(5)}")</textarea>
                         </div>
                         <p>Stampa numeri da 1 a 15, sostituendo multipli di 3 con "Fizz", di 5 con "Buzz", di entrambi con "FizzBuzz":</p>
                         <div class="interactive-demo">
-                            <textarea class="code-input" style="min-height: 120px;"># FizzBuzz classico
-for i in range(1, 16):
-    if i % 15 == 0:
-        print("FizzBuzz")
-    elif i % 3 == 0:
-        print("Fizz")
-    elif i % 5 == 0:
-        print("Buzz")
-    else:
-        print(i)</textarea>
+                            <textarea class="code-input"># FizzBuzz compatto
+for i in range(1, 11):
+    if i % 15 == 0: print("FizzBuzz")
+    elif i % 3 == 0: print("Fizz")
+    elif i % 5 == 0: print("Buzz")
+    else: print(i)</textarea>
                             <button class="btn" onclick="runCode(this)">
                                 <i class="fas fa-play"></i> Esegui
                             </button>
@@ -1302,22 +2240,17 @@ for i in range(1, 16):
                         </div>
                         <p>Genera i primi 10 numeri della sequenza di Fibonacci:</p>
                         <div class="interactive-demo">
-                            <textarea class="code-input" style="min-height: 120px;"># Fibonacci iterativo (più efficiente)
+                            <textarea class="code-input"># Fibonacci semplice
 def fibonacci(n):
-    if n <= 1:
-        return n
+    if n <= 1: return n
     a, b = 0, 1
     for _ in range(2, n + 1):
         a, b = b, a + b
     return b
 
-print("Primi 10 numeri di Fibonacci:")
-for i in range(10):
-    print(f"F({i}) = {fibonacci(i)}")
-
-# Lista dei primi 10
-fib_lista = [fibonacci(i) for i in range(10)]
-print(f"\nLista: {fib_lista}")</textarea>
+# Primi 8 numeri
+for i in range(8):
+    print(f"F({i}) = {fibonacci(i)}")</textarea>
                             <button class="btn" onclick="runCode(this)">
                                 <i class="fas fa-play"></i> Esegui
                             </button>
@@ -1325,7 +2258,7 @@ print(f"\nLista: {fib_lista}")</textarea>
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card wide-code">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-gamepad"></i>
@@ -1360,7 +2293,7 @@ print(f"\nIl numero era: {numero_segreto}")</textarea>
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card wide-code">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-sort"></i>
@@ -1548,20 +2481,157 @@ print(test_finally())</textarea>
             </section>
         </main>
 
-        <footer class="footer">
-            <div class="footer-icon">
-                <i class="fab fa-python"></i>
-            </div>
-            <h2>Python - Il Linguaggio del Futuro</h2>
-            <p>Hai completato l'introduzione a Python! Continua a praticare con progetti reali per padroneggiare questo potente linguaggio di programmazione.</p>
-            <div style="margin-top: 1rem; opacity: 0.8;">
-                <p>🐍 Python è versatile • 🚀 Facile da imparare • 💪 Potente per ogni progetto</p>
-            </div>
-        </footer>
+    </main>
+
+    <!-- Navigation Popup -->
+    <div class="nav-popup" id="navPopup">
+        <div class="nav-sections" id="navSections">
+            <!-- Pills will be populated by JavaScript -->
+        </div>
     </div>
+    
+    <!-- Navigation Toggle Button -->
+    <button class="nav-toggle" id="navToggle" aria-label="Mostra navigazione">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Python Tutorial Library - Hai completato l'introduzione a Python! 🐍</p>
+    </footer>
 
 <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
     <script>
+        // Mobile sidebar functionality
+        const mobileSidebarToggle = document.querySelector('.mobile-sidebar-toggle');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const sidebarClose = document.querySelector('.sidebar-close');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        let isSidebarOpen = false;
+
+        function toggleMobileSidebar() {
+            isSidebarOpen = !isSidebarOpen;
+            const icon = mobileSidebarToggle.querySelector('i');
+
+            if (isSidebarOpen) {
+                mobileSidebar.classList.add('active');
+                icon.className = 'fas fa-times';
+                mobileSidebarToggle.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileSidebar.classList.remove('active');
+                icon.className = 'fas fa-bars';
+                mobileSidebarToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeMobileSidebar() {
+            if (isSidebarOpen) {
+                toggleMobileSidebar();
+            }
+        }
+
+        // Event listeners for sidebar
+        mobileSidebarToggle.addEventListener('click', toggleMobileSidebar);
+        sidebarClose.addEventListener('click', closeMobileSidebar);
+        sidebarOverlay.addEventListener('click', closeMobileSidebar);
+
+        // Sidebar section toggles
+        document.querySelectorAll('.sidebar-section-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const section = this.parentElement;
+                section.classList.toggle('active');
+            });
+        });
+
+        // Close sidebar on link click
+        document.querySelectorAll('.sidebar-sublink').forEach(link => {
+            link.addEventListener('click', closeMobileSidebar);
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isSidebarOpen && !mobileSidebar.contains(e.target) && !mobileSidebarToggle.contains(e.target)) {
+                closeMobileSidebar();
+            }
+        });
+
+        // Close sidebar on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isSidebarOpen) {
+                closeMobileSidebar();
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Active section highlighting in sidebar
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('.section');
+            const sidebarLinks = document.querySelectorAll('.sidebar-sublink');
+
+            let currentSection = '';
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+        window.addEventListener('load', updateActiveSection);
+
+        // Close sidebar on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && isSidebarOpen) {
+                closeMobileSidebar();
+            }
+        });
+
+        // Pyodide setup
         let pyodideReady = false;
     let pyodide = null;
 
@@ -1712,8 +2782,154 @@ sys.stdout.getvalue() + sys.stderr.getvalue()
         }
     });
 
+    // Enhanced Navigation Popup Functionality
+    const navPopup = document.getElementById('navPopup');
+    const navSections = document.getElementById('navSections');
+    const navToggle = document.getElementById('navToggle');
+    
+    const sections = [
+        { id: 'intro', title: 'Intro', short: 'IN' },
+        { id: 'repl', title: 'REPL', short: 'RE' },
+        { id: 'sintassi', title: 'Sintassi', short: 'SI' },
+        { id: 'tipi', title: 'Tipi', short: 'TI' },
+        { id: 'operatori', title: 'Operatori', short: 'OP' },
+        { id: 'costrutti', title: 'Costrutti', short: 'CO' },
+        { id: 'motivazioni', title: 'Perché', short: 'PY' },
+        { id: 'esempi', title: 'Esempi', short: 'ES' },
+        { id: 'esercizi', title: 'Esercizi', short: 'EX' },
+        { id: 'concetti', title: 'Avanzati', short: 'AV' }
+    ];
+    
+    let currentSectionIndex = 0;
+    let popupTimeout;
+    let isPopupHidden = false;
+    let autoHideTimeout;
+    
+    function createNavPills() {
+        navSections.innerHTML = '';
+        
+        // Determina il range di sezioni da mostrare (max 5: 2 prima + corrente + 2 dopo)
+        const startIndex = Math.max(0, currentSectionIndex - 2);
+        const endIndex = Math.min(sections.length - 1, currentSectionIndex + 2);
+        
+        for (let i = startIndex; i <= endIndex; i++) {
+            const section = sections[i];
+            const pill = document.createElement('a');
+            pill.href = '#' + section.id;
+            pill.textContent = section.short;
+            pill.className = 'nav-pill';
+            pill.title = section.title;
+            
+            // Assegna le classi in base alla posizione relativa
+            if (i === currentSectionIndex) {
+                pill.classList.add('current');
+            } else if (i < currentSectionIndex) {
+                const distance = currentSectionIndex - i;
+                pill.classList.add(distance === 1 ? 'near-before' : 'far-before');
+            } else {
+                const distance = i - currentSectionIndex;
+                pill.classList.add(distance === 1 ? 'near-after' : 'far-after');
+            }
+            
+            pill.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetElement = document.getElementById(section.id);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+            
+            navSections.appendChild(pill);
+        }
+    }
+    
+    function showNavPopup() {
+        if (isPopupHidden) return;
+        
+        clearTimeout(popupTimeout);
+        clearTimeout(autoHideTimeout);
+        
+        createNavPills();
+        navPopup.classList.remove('hidden');
+        navPopup.classList.add('visible');
+        navToggle.classList.remove('visible');
+        
+        // Auto-hide dopo 4 secondi
+        autoHideTimeout = setTimeout(() => {
+            if (!navPopup.matches(':hover')) {
+                hideNavPopup();
+            }
+        }, 4000);
+    }
+    
+    function hideNavPopup() {
+        navPopup.classList.remove('visible');
+        navPopup.classList.add('hidden');
+        navToggle.classList.add('visible');
+        clearTimeout(popupTimeout);
+        clearTimeout(autoHideTimeout);
+        isPopupHidden = true;
+        
+        // Reset dopo un po'
+        setTimeout(() => {
+            isPopupHidden = false;
+        }, 2000);
+    }
+    
+    function forceShowNavPopup() {
+        isPopupHidden = false;
+        navPopup.classList.remove('hidden');
+        navToggle.classList.remove('visible');
+        showNavPopup();
+    }
+    
+    function updateCurrentSection() {
+        const scrollPos = window.scrollY + 150;
+        let newCurrentIndex = 0;
+        
+        sections.forEach((section, index) => {
+            const element = document.getElementById(section.id);
+            if (element) {
+                const rect = element.getBoundingClientRect();
+                const elementTop = rect.top + window.scrollY;
+                
+                if (scrollPos >= elementTop) {
+                    newCurrentIndex = index;
+                }
+            }
+        });
+        
+        if (newCurrentIndex !== currentSectionIndex) {
+            currentSectionIndex = newCurrentIndex;
+            showNavPopup();
+        }
+    }
+    
+    // Event listeners
+    window.addEventListener('scroll', updateCurrentSection);
+    
+    navPopup.addEventListener('mouseenter', () => {
+        clearTimeout(autoHideTimeout);
+    });
+    
+    navPopup.addEventListener('mouseleave', () => {
+        autoHideTimeout = setTimeout(() => {
+            hideNavPopup();
+        }, 1000);
+    });
+    
+    navToggle.addEventListener('click', forceShowNavPopup);
+    
+    // Touch events for mobile
+    navToggle.addEventListener('touchstart', forceShowNavPopup);
+
     // Inizializzazione
     document.addEventListener('DOMContentLoaded', function() {
+        updateCurrentSection();
+        setTimeout(showNavPopup, 1000); // Mostra il popup inizialmente
         updateActiveSection();
 
         // Auto-focus primo input
